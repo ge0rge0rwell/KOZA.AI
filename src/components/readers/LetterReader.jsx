@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowLeft, Volume2, VolumeX, Sparkles } from 'lucide-react';
+import { ArrowLeft, Volume2, VolumeX } from 'lucide-react';
 import useSpeech from '../../hooks/useSpeech';
 import { fireCelebration } from '../../lib/confetti';
 import { cn } from '../../utils/helpers';
@@ -60,21 +60,39 @@ const LetterReader = ({ letter: creation, onBack, footerActions, onFinish }) => 
                 {!opened ? (
                     /* ---------- Zarf ---------- */
                     <button onClick={() => setOpened(true)} className="group text-center animate-scale-in" aria-label="Mektubu aç">
-                        <div className="relative mx-auto mb-7 h-44 w-64 transition-transform duration-500 group-hover:scale-105 sm:h-52 sm:w-80">
-                            <div className="absolute inset-0 rounded-2xl bg-white shadow-lift" />
-                            <div
-                                className="absolute inset-x-0 top-0 h-1/2 rounded-t-2xl"
-                                style={{ background: `linear-gradient(160deg, ${theme}25, ${theme}0d)`, clipPath: 'polygon(0 0, 100% 0, 50% 100%)' }}
-                            />
+                        <div className="relative mx-auto mb-7 h-44 w-64 transition-transform duration-500 group-hover:scale-[1.04] sm:h-52 sm:w-80">
+                            <svg viewBox="0 0 320 210" className="w-full h-full" aria-hidden>
+                                <defs>
+                                    <filter id="env-shadow" x="-8%" y="-8%" width="116%" height="116%">
+                                        <feDropShadow dx="0" dy="4" stdDeviation="8" floodColor="#21211a" floodOpacity="0.12" />
+                                    </filter>
+                                </defs>
+                                {/* Zarf gövdesi */}
+                                <rect x="4" y="44" width="312" height="162" rx="14" fill="white" filter="url(#env-shadow)" />
+                                {/* Sol iç katman */}
+                                <path d="M4 44 L160 138 L4 206 Z" fill={`${theme}0e`} stroke={`${theme}30`} strokeWidth="0.8" />
+                                {/* Sağ iç katman */}
+                                <path d="M316 44 L160 138 L316 206 Z" fill={`${theme}0e`} stroke={`${theme}30`} strokeWidth="0.8" />
+                                {/* Alt iç katman */}
+                                <path d="M4 206 L160 120 L316 206 Z" fill={`${theme}16`} />
+                                {/* Kapalı üst kapak */}
+                                <path d="M4 44 L160 142 L316 44 Z" fill={`${theme}28`} stroke={`${theme}55`} strokeWidth="1.2" />
+                                {/* Mühür dairesi */}
+                                <circle cx="160" cy="118" r="26" fill={theme} />
+                                <circle cx="160" cy="118" r="22" fill={`${theme}cc`} />
+                            </svg>
+                            {/* Kelebek emoji — mühür üzerine konumlanır */}
                             <span
-                                className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-white shadow-card animate-float-soft"
-                                style={{ background: theme }}
+                                className="pointer-events-none absolute text-2xl animate-float-soft select-none"
+                                aria-hidden
+                                style={{ top: '54%', left: '50%', transform: 'translate(-50%, -50%)' }}
                             >
-                                <Sparkles size={20} />
+                                🦋
                             </span>
                         </div>
                         <h2 className="mb-1.5 text-xl font-extrabold text-neutral-900">Sana bir mektup var</h2>
                         <p className="text-sm font-bold text-neutral-400">5 yıl sonraki senden · Açmak için dokun</p>
+                        <p className="mt-3 text-[12px] font-bold text-primary-500 animate-pulse-soft">↓ Dokun</p>
                     </button>
                 ) : (
                     /* ---------- Mektup ---------- */

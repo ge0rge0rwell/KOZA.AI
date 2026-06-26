@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import {
     BarChart3, ShieldCheck, TrendingUp, TrendingDown, Minus, Users, Heart,
-    Handshake, AlertTriangle, Lightbulb, FlaskConical, Lock,
+    Handshake, AlertTriangle, Lightbulb, FlaskConical, Lock, Printer,
 } from 'lucide-react';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
@@ -81,23 +81,99 @@ const CategoryBars = ({ categories }) => {
     );
 };
 
-const WeeklyChart = ({ weekly }) => {
+const WeeklyLineChart = ({ weekly }) => {
     const max = Math.max(...weekly.map((w) => w.adet), 1);
+    const W = 400;
+    const H = 130;
+    const PAD = { t: 28, r: 16, b: 28, l: 16 };
+    const cW = W - PAD.l - PAD.r;
+    const cH = H - PAD.t - PAD.b;
+
+    const pts = weekly.map((w, i) => ({
+        x: PAD.l + (weekly.length > 1 ? (i / (weekly.length - 1)) * cW : cW / 2),
+        y: PAD.t + cH - Math.max((w.adet / max) * cH, 2),
+        value: w.adet,
+        label: w.hafta.replace(' önce', '').replace('Bu hafta', 'Bu hf'),
+    }));
+
+    const linePoints = pts.map((p) => `${p.x},${p.y}`).join(' ');
+    const areaD = [
+        `M${pts[0].x},${PAD.t + cH}`,
+        ...pts.map((p) => `L${p.x},${p.y}`),
+        `L${pts[pts.length - 1].x},${PAD.t + cH}`,
+        'Z',
+    ].join(' ');
+
     return (
-        <div className="flex h-44 items-end justify-between gap-3 px-1">
-            {weekly.map((w, i) => (
-                <div key={w.hafta} className="flex flex-1 flex-col items-center gap-2">
-                    <span className="text-[12px] font-extrabold tabular-nums text-neutral-500">{w.adet}</span>
-                    <div
-                        className={cn(
-                            'w-full max-w-[44px] rounded-t-xl transition-[height] duration-1000 ease-out',
-                            i === weekly.length - 1 ? 'bg-primary-500' : 'bg-primary-200'
-                        )}
-                        style={{ height: `${Math.max((w.adet / max) * 120, 6)}px` }}
+        <div className="h-44 w-full">
+            <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-full overflow-visible" aria-label="Haftalık paylaşım grafiği">
+                <defs>
+                    <linearGradient id="cg-fill" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="var(--color-primary-400)" stopOpacity="0.22" />
+                        <stop offset="100%" stopColor="var(--color-primary-400)" stopOpacity="0" />
+                    </linearGradient>
+                </defs>
+
+                {/* Yatay kılavuz çizgileri */}
+                {[0.33, 0.66].map((frac, i) => (
+                    <line
+                        key={i}
+                        x1={PAD.l} y1={PAD.t + cH * (1 - frac)}
+                        x2={PAD.l + cW} y2={PAD.t + cH * (1 - frac)}
+                        stroke="var(--color-neutral-100)"
+                        strokeWidth="1"
+                        strokeDasharray="4 4"
                     />
-                    <span className="text-[10px] font-bold text-neutral-400">{w.hafta}</span>
-                </div>
-            ))}
+                ))}
+
+                {/* Alan dolgusu */}
+                <path d={areaD} fill="url(#cg-fill)" />
+
+                {/* Ana çizgi */}
+                <polyline
+                    points={linePoints}
+                    fill="none"
+                    stroke="var(--color-primary-400)"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="chart-line"
+                />
+
+                {/* Veri noktaları */}
+                {pts.map((p, i) => {
+                    const isLast = i === weekly.length - 1;
+                    return (
+                        <g key={i}>
+                            <text
+                                x={p.x} y={p.y - 9}
+                                textAnchor="middle"
+                                fontSize="11"
+                                fontWeight="800"
+                                fill="var(--color-neutral-600)"
+                            >
+                                {p.value}
+                            </text>
+                            <circle
+                                cx={p.x} cy={p.y}
+                                r={isLast ? 6 : 4}
+                                fill={isLast ? 'var(--color-primary-500)' : 'var(--color-primary-300)'}
+                                stroke="white"
+                                strokeWidth="2"
+                            />
+                            <text
+                                x={p.x} y={H - 4}
+                                textAnchor="middle"
+                                fontSize="9"
+                                fontWeight="700"
+                                fill="var(--color-neutral-400)"
+                            >
+                                {p.label}
+                            </text>
+                        </g>
+                    );
+                })}
+            </svg>
         </div>
     );
 };
@@ -113,6 +189,13 @@ const StatCard = ({ icon: Icon, label, value, tone }) => (
         </span>
     </Card>
 );
+
+const getRiskLevel = (data) => {
+    const delta = data.weekly[4].adet - data.weekly[3].adet;
+    if (delta >= 3 || data.weekly[4].adet >= 15) return { label: 'Yüksek', icon: '🔴', color: 'text-danger-700', bg: 'bg-danger-50', border: 'border-danger-200' };
+    if (delta >= 1 || data.weekly[4].adet >= 8) return { label: 'Orta', icon: '🟡', color: 'text-accent-700', bg: 'bg-accent-50/60', border: 'border-accent-200' };
+    return { label: 'Düşük', icon: '🟢', color: 'text-success-700', bg: 'bg-success-50', border: 'border-success-200' };
+};
 
 /* ---------------- Öneri motoru ---------------- */
 const RECOMMENDATIONS = {
@@ -165,9 +248,16 @@ const CounselorPage = () => {
                         Öğrencilerin anonim paylaşımlarından türetilen eğilimler. Veri odaklı önleyici strateji için.
                     </p>
                 </div>
-                {realData && demoMode && (
-                    <Button size="sm" variant="secondary" onClick={() => setDemoMode(false)}>Gerçek veriye dön</Button>
-                )}
+                <div className="flex items-center gap-2">
+                    {realData && demoMode && (
+                        <Button size="sm" variant="secondary" onClick={() => setDemoMode(false)}>Gerçek veriye dön</Button>
+                    )}
+                    {data && (
+                        <Button size="sm" variant="secondary" icon={Printer} onClick={() => window.print()}>
+                            Raporu Yazdır
+                        </Button>
+                    )}
+                </div>
             </header>
 
             {/* ---------- Gizlilik garantisi ---------- */}
@@ -189,7 +279,18 @@ const CounselorPage = () => {
                     />
                 </Card>
             ) : (
-                <>
+                <div className="print-area space-y-6">
+                    {/* Yalnızca yazdırma görünümünde görünür başlık */}
+                    <div style={{ display: 'none' }} className="print-header">
+                        <h1 style={{ fontSize: 20, fontWeight: 800, marginBottom: 4 }}>KOZA Okul Analiz Raporu</h1>
+                        <p style={{ fontSize: 12, color: '#777' }}>
+                            Tarih: {new Date().toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })}
+                            {' · '}Tüm veriler kimliksizleştirilmiştir · Bireysel öğrenci tespit edilemez.
+                        </p>
+                        <hr style={{ margin: '12px 0', borderColor: '#eee' }} />
+                    </div>
+                    <style>{`@media print { .print-header { display: block !important; margin-bottom: 20px; } }`}</style>
+
                     {/* ---------- Özet kartları ---------- */}
                     <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 stagger-children">
                         <StatCard icon={Users} label="Anonim paylaşım" value={data.totalShares} tone="bg-primary-50 text-primary-600" />
@@ -211,6 +312,28 @@ const CounselorPage = () => {
                         </Card>
                     </div>
 
+                    {/* ---------- Risk seviyesi ---------- */}
+                    {(() => {
+                        const risk = getRiskLevel(data);
+                        return (
+                            <Card className={cn('flex items-center justify-between gap-4 p-5 animate-rise-in', risk.bg, risk.border)} style={{ animationDelay: '0.1s' }}>
+                                <div className="flex items-center gap-3.5">
+                                    <span className="text-2xl" aria-hidden>{risk.icon}</span>
+                                    <div>
+                                        <p className={cn('text-[12px] font-extrabold uppercase tracking-widest', risk.color)}>Haftalık Risk Seviyesi</p>
+                                        <p className={cn('text-xl font-extrabold', risk.color)}>{risk.label}</p>
+                                    </div>
+                                </div>
+                                <p className="text-right text-[12px] font-bold leading-relaxed text-neutral-500 max-w-xs hidden sm:block">
+                                    Bu hafta <strong className="text-neutral-700">{data.weekly[4].adet}</strong> paylaşım · geçen haftaya göre{' '}
+                                    <strong className={trendDelta > 0 ? 'text-danger-600' : trendDelta < 0 ? 'text-success-600' : 'text-neutral-600'}>
+                                        {trendDelta > 0 ? `+${trendDelta}` : trendDelta === 0 ? 'değişim yok' : trendDelta}
+                                    </strong>
+                                </p>
+                            </Card>
+                        );
+                    })()}
+
                     <div className="grid gap-5 lg:grid-cols-2">
                         {/* ---------- Kategori dağılımı ---------- */}
                         <Card className="p-6 animate-rise-in sm:p-7" style={{ animationDelay: '0.12s' }}>
@@ -223,7 +346,7 @@ const CounselorPage = () => {
                         <Card className="p-6 animate-rise-in sm:p-7" style={{ animationDelay: '0.18s' }}>
                             <h2 className="mb-1 font-extrabold text-neutral-900">Haftalık paylaşım eğilimi</h2>
                             <p className="mb-6 text-[12px] font-bold text-neutral-400">Son 5 haftadaki anonim paylaşım hacmi</p>
-                            <WeeklyChart weekly={data.weekly} />
+                            <WeeklyLineChart weekly={data.weekly} />
                         </Card>
                     </div>
 
@@ -266,7 +389,7 @@ const CounselorPage = () => {
                             </button>
                         </p>
                     )}
-                </>
+                </div>
             )}
         </div>
     );

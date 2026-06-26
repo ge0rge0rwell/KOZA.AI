@@ -30,3 +30,6 @@ dist-ssr
 
 # Admin panel (private)
 src/components/admin/AdminPanel.jsx
+docs/superpowers/plans/2026-06-26-koza-surgical-polish.md
+.gitignore
+docs/superpowers/specs/2026-06-26-koza-surgical-polish-design.md

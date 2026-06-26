@@ -7,8 +7,8 @@
  */
 import {
     doc, setDoc, getDoc, updateDoc, deleteDoc, addDoc,
-    collection, query, orderBy, limit, onSnapshot,
-    serverTimestamp, increment, arrayUnion,
+    collection, query, orderBy, where, limit, onSnapshot,
+    serverTimestamp, increment, arrayUnion, getDocs,
 } from 'firebase/firestore';
 import { db } from './firebase';
 
@@ -122,4 +122,21 @@ export const reportCommunityItem = async (id) => {
 export const deleteCommunityItem = async (id) => {
     guard();
     await deleteDoc(doc(db, 'community', id));
+};
+
+/**
+ * Hemhal Uçurtması — >= minHugs "hemhal" tepkisi almış eserleri getirir.
+ * Yönetici panelinde gösterilir; en çok yankılanan eserler tohumlanır.
+ * Minimum eşik: 10 hemhal = gerçek terapötik rezonans sinyali.
+ */
+export const getTopHemhalStories = async (minHugs = 10, maxResults = 30) => {
+    guard();
+    const q = query(
+        collection(db, 'community'),
+        where('hugs', '>=', minHugs),
+        orderBy('hugs', 'desc'),
+        limit(maxResults),
+    );
+    const snap = await getDocs(q);
+    return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
 };

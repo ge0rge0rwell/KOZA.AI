@@ -6,18 +6,26 @@
 import { SYSTEM_PROMPT, STORY_PROMPT, GAME_PROMPT, LETTER_PROMPT } from '../config/prompts';
 import { CATEGORY_KEYS, THEME_COLORS } from '../config/constants';
 import { LOCAL_STORY_PAGES, LOCAL_GAME_LEVELS, LOCAL_LETTER } from '../config/seedContent';
+import { detectCategory, retrieveFragments, buildFewShotBlock } from './storyRag';
+import {
+    ARCHITECTURE_SYSTEM, buildArchitectureContent, parseArchitecture, buildInjectionBlock, detectSpaces,
+    EDITORIAL_SYSTEM, buildEditorialContent, applyEditorial,
+} from './storyIntelligence';
 
 const API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY;
 const BASE_URL = 'https://openrouter.ai/api/v1/chat/completions';
 
 const MODEL_CHAIN = [
     import.meta.env.VITE_OPENROUTER_MODEL,
-    'google/gemma-3-27b-it:free',
+    'google/gemma-4-31b-it:free',
+    'openai/gpt-oss-120b:free',
     'meta-llama/llama-3.3-70b-instruct:free',
-    'mistralai/mistral-small-3.1-24b-instruct:free',
+    'nousresearch/hermes-3-llama-3.1-405b:free',
 ].filter(Boolean);
 
 const REQUEST_TIMEOUT = 75_000;
+const ARCH_TIMEOUT = 25_000;   // mimari çağrı kısadır
+const EDIT_TIMEOUT = 45_000;   // editoryal 2-3 sayfa yazar
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 /* ---------------- Önbellek ---------------- */
@@ -54,9 +62,9 @@ const extractJSON = (text) => {
 };
 
 /* ---------------- API çağrısı ---------------- */
-const callModel = async (model, userContent) => {
+const callModel = async (model, userContent, systemPrompt = SYSTEM_PROMPT, timeout = REQUEST_TIMEOUT) => {
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT);
+    const timer = setTimeout(() => controller.abort(), timeout);
 
     try {
         const res = await fetch(BASE_URL, {
@@ -71,7 +79,7 @@ const callModel = async (model, userContent) => {
             body: JSON.stringify({
                 model,
                 messages: [
-                    { role: 'system', content: SYSTEM_PROMPT },
+                    { role: 'system', content: systemPrompt },
                     { role: 'user', content: userContent },
                 ],
                 temperature: 0.85,
@@ -89,9 +97,10 @@ const callModel = async (model, userContent) => {
     }
 };
 
-const callAI = async (prompt, userInput, onStage) => {
+/** Standart hikâye/oyun/mektup üretimi — SYSTEM_PROMPT + PROMPTS[mode] + ekstra bloklar */
+const callAI = async (prompt, userInput, onStage, extraBlock = '') => {
     if (!API_KEY) throw new Error('NO_KEY');
-    const userContent = `${prompt}\n\nKULLANICININ DENEYİMİ:\n"""${userInput}"""`;
+    const userContent = `${prompt}${extraBlock}\n\nKULLANICININ DENEYİMİ:\n"""${userInput}"""`;
     let lastError;
 
     for (const model of MODEL_CHAIN) {
@@ -100,11 +109,31 @@ const callAI = async (prompt, userInput, onStage) => {
                 return await callModel(model, userContent);
             } catch (e) {
                 lastError = e;
-                if (e.name === 'AbortError') break; // zaman aşımı → sıradaki model
+                if (e.name === 'AbortError') break;
                 await sleep(800 * (attempt + 1));
             }
         }
         onStage?.('Başka bir kanat deneniyor…');
+    }
+    throw lastError || new Error('AI kullanılamıyor');
+};
+
+/** Farklı sistem promptu ve zaman aşımıyla çağrı — mimari/editoryal geçişler için */
+const callAIRaw = async (systemPrompt, userContent, onStage, timeout = REQUEST_TIMEOUT) => {
+    if (!API_KEY) throw new Error('NO_KEY');
+    let lastError;
+
+    for (const model of MODEL_CHAIN) {
+        for (let attempt = 0; attempt < 2; attempt++) {
+            try {
+                return await callModel(model, userContent, systemPrompt, timeout);
+            } catch (e) {
+                lastError = e;
+                if (e.name === 'AbortError') break;
+                await sleep(600 * (attempt + 1));
+            }
+        }
+        onStage?.('Analiz devam ediyor…');
     }
     throw lastError || new Error('AI kullanılamıyor');
 };
@@ -190,6 +219,12 @@ const NORMALIZERS = { story: normalizeStory, game: normalizeGame, letter: normal
 /**
  * Deneyimi seçilen türde içeriğe dönüştürür.
  * Asla reddetmez: AI erişilemezse özenle yazılmış yerel içerik döner (source: 'local').
+ *
+ * Hikâye modu — 3 aşamalı boru hattı:
+ *   1. Mimari çağrı  → çıpa / metafor / ters-çevirme / yay tipi / şiddet skoru
+ *   2. Üretim çağrısı → RAG + mimari enjeksiyonu ile zenginleştirilmiş hikâye
+ *   3. Editoryal geçiş → 2 zayıf sayfa yeniden yazılır, son cümle görüntü zorlanır
+ * Her aşama bağımsız try/catch: herhangi biri düşerse hat kırılmaz.
  */
 export const generateContent = async (mode, userInput, onStage) => {
     const key = cacheKey(mode, userInput);
@@ -197,12 +232,70 @@ export const generateContent = async (mode, userInput, onStage) => {
     if (cached) return cached;
 
     try {
+        /* ── HİKÂYE — 3 çağrılı boru hattı ─────────────────────────────────── */
+        if (mode === 'story') {
+            // AŞAMA 1 — Deneyim mimarisi
+            onStage?.('Deneyimin derinliği ölçülüyor…');
+            let analysis = null;
+            let injectionBlock = '';
+            let spaces = [];
+
+            try {
+                const archRaw = await callAIRaw(
+                    ARCHITECTURE_SYSTEM,
+                    buildArchitectureContent(userInput),
+                    onStage,
+                    ARCH_TIMEOUT,
+                );
+                analysis = parseArchitecture(archRaw);
+                spaces = detectSpaces(userInput);
+                injectionBlock = buildInjectionBlock(analysis, spaces);
+            } catch (archErr) {
+                console.warn('Mimari analiz atlandı:', archErr?.message);
+            }
+
+            // RAG kalite fragmentleri
+            let ragBlock = '';
+            try {
+                const category = detectCategory(userInput);
+                const fragments = retrieveFragments(userInput, category, 2);
+                ragBlock = buildFewShotBlock(fragments);
+            } catch { /* sessiz */ }
+
+            // AŞAMA 2 — Hikâye üretimi (mimari + RAG enjeksiyonu)
+            onStage?.('Hikâyen örülüyor…');
+            const raw = await callAI(STORY_PROMPT, userInput, onStage, injectionBlock + ragBlock);
+            let normalized = normalizeStory(raw);
+
+            // AŞAMA 3 — Editoryal kalite geçişi
+            if (analysis) {
+                onStage?.('Son dokunuşlar yapılıyor…');
+                try {
+                    const editRaw = await callAIRaw(
+                        EDITORIAL_SYSTEM,
+                        buildEditorialContent(normalized.pages, analysis),
+                        onStage,
+                        EDIT_TIMEOUT,
+                    );
+                    normalized = { ...normalized, pages: applyEditorial(normalized.pages, editRaw) };
+                } catch (editErr) {
+                    console.warn('Editoryal geçiş atlandı:', editErr?.message);
+                }
+            }
+
+            const result = { ...normalized, source: 'ai' };
+            setCached(key, result);
+            return result;
+        }
+
+        /* ── OYUN ve MEKTUP — tek çağrı ─────────────────────────────────────── */
         onStage?.('Deneyimin okunuyor…');
         const raw = await callAI(PROMPTS[mode], userInput, onStage);
         onStage?.('Kanatlar şekilleniyor…');
         const result = { ...NORMALIZERS[mode](raw), source: 'ai' };
         setCached(key, result);
         return result;
+
     } catch (e) {
         console.warn('AI üretimi başarısız, yerel üreticiye geçildi:', e?.message);
         return localGenerate(mode);

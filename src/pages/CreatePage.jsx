@@ -21,29 +21,86 @@ const TYPES = [
     { id: 'letter', icon: Mail, title: 'Mektup', desc: '5 yıl sonraki senden, bugünkü sana yazılmış umut dolu bir mektup alırsın.' },
 ];
 
-const LOADING_LINES = [
-    'Deneyimin nazikçe okunuyor…',
-    'Anlatı Terapisi ilkeleri uygulanıyor…',
-    'Sen bir kahraman olarak yeniden çiziliyorsun…',
-    'Sayfalar tek tek dokunuyor…',
-    'Kanatlar şekilleniyor…',
-    'Son ışıltılar ekleniyor…',
-];
+const PIPELINE_STAGES = ['Mimari Analiz', 'Hikâye Üretimi', 'Editoryal Kontrol'];
+const getPipelineStage = (tick) => Math.min(2, Math.floor(tick / 4));
+
+const LOADING_LINES = {
+    story: [
+        'Deneyiminin derinliği ölçülüyor…',
+        'Yaranın tam yerini arıyoruz…',
+        'Hikâyenin çıpası belirleniyor…',
+        'Karakterin kim olduğu şekilleniyor…',
+        'Sana özel sayfalar tek tek örülüyor…',
+        'Her sözcük, yalnızca sen için seçiliyor…',
+        'Hikâyen yazılıyor — gerçek, yalnızca sana ait…',
+        'Kahraman sahnede beliriyor…',
+        'Son dokunuşlar yapılıyor…',
+        'En zayıf sahneler yeniden yazılıyor…',
+        'Her sayfa son kez okunuyor…',
+        'Neredeyse hazır…',
+    ],
+    game: [
+        'Deneyimin sahnelere dönüştürülüyor…',
+        'Karar anları şekilleniyor…',
+        'Zorlu seçimler hazırlanıyor…',
+        'Her seçeneğin geri bildirimi yazılıyor…',
+        'Bölümler birleştiriliyor…',
+        'Doğru yollar belirleniyor…',
+        'Oyunun son sahnesi oluşturuluyor…',
+        'Neredeyse hazır…',
+    ],
+    letter: [
+        'Deneyimin okunuyor…',
+        '5 yıl sonraki sen sahneye çıkıyor…',
+        'Sana özel sözcükler seçiliyor…',
+        'Mektup yazılıyor…',
+        'Paragraflar sıralanıyor…',
+        'Son söz belirleniyor…',
+        'Zarf mühürleniyor…',
+        'Neredeyse hazır…',
+    ],
+};
 
 /* ---------- Üretim sırasında tam ekran sahne ---------- */
-const GenerationOverlay = () => {
+const GenerationOverlay = ({ type = 'story' }) => {
     const [tick, setTick] = useState(0);
+    const lines = LOADING_LINES[type] ?? LOADING_LINES.story;
+    const pipelineStage = type === 'story' ? getPipelineStage(tick) : -1;
     useEffect(() => {
-        const t = setInterval(() => setTick((v) => v + 1), 2400);
+        const t = setInterval(() => setTick((v) => v + 1), 3000);
         return () => clearInterval(t);
     }, []);
     return (
         <div className="fixed inset-0 z-[80] flex flex-col items-center justify-center bg-neutral-50/95 backdrop-blur-md animate-fade-in" role="status" aria-live="polite">
-            <CocoonVisual stage={(tick % 7) + 1} size={230} />
-            <p key={tick} className="mt-2 text-base font-extrabold text-neutral-700 animate-rise-in">
-                {LOADING_LINES[tick % LOADING_LINES.length]}
+            <CocoonVisual stage={(tick % 7) + 1} size={220} />
+            <p key={tick} className="mt-3 text-base font-extrabold text-neutral-700 animate-rise-in">
+                {lines[tick % lines.length]}
             </p>
-            <p className="mt-2 text-[12px] font-bold text-neutral-400">Bu işlem yaklaşık 30–60 saniye sürer · Sayfadan ayrılma</p>
+            {type === 'story' && (
+                <div className="mt-5 flex items-center gap-2" aria-label="AI üretim aşaması">
+                    {PIPELINE_STAGES.map((name, i) => {
+                        const active = pipelineStage === i;
+                        const done = pipelineStage > i;
+                        return (
+                            <React.Fragment key={name}>
+                                <div
+                                    className={cn(
+                                        'flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-extrabold transition-all duration-700',
+                                        active ? 'bg-primary-600 text-white shadow-card scale-105' :
+                                        done ? 'bg-success-100 text-success-700' :
+                                        'bg-neutral-100 text-neutral-400'
+                                    )}
+                                >
+                                    <span aria-hidden>{done ? '✓' : active ? '●' : '○'}</span>
+                                    {name}
+                                </div>
+                                {i < 2 && <span className="text-neutral-300 font-bold text-[10px]" aria-hidden>→</span>}
+                            </React.Fragment>
+                        );
+                    })}
+                </div>
+            )}
+            <p className="mt-4 text-[12px] font-bold text-neutral-400 text-center max-w-xs">Bu 30–60 saniye, senin için harcanan her kelimedir · Sayfadan ayrılma</p>
         </div>
     );
 };
@@ -111,7 +168,7 @@ const CreatePage = () => {
 
     return (
         <div className="mx-auto max-w-2xl space-y-7">
-            {generating && <GenerationOverlay />}
+            {generating && <GenerationOverlay type={type} />}
 
             {/* ---------- Sonuç ekranı ---------- */}
             {result ? (
