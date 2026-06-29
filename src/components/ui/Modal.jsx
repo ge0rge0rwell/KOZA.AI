@@ -35,7 +35,7 @@ const Modal = ({ open, onClose, size = 'md', children, className, labelledBy }) 
         >
             <button
                 aria-label="Kapat"
-                className="absolute inset-0 bg-neutral-950/35 backdrop-blur-[6px] animate-fade-in cursor-default"
+                className="absolute inset-0 bg-neutral-950/40 backdrop-blur-[8px] animate-fade-in cursor-default"
                 onClick={onClose}
                 tabIndex={-1}
             />
@@ -43,9 +43,11 @@ const Modal = ({ open, onClose, size = 'md', children, className, labelledBy }) 
                 ref={ref}
                 tabIndex={-1}
                 className={cn(
-                    'relative w-full overflow-hidden bg-white shadow-pop outline-none animate-modal-in',
+                    'relative w-full overflow-hidden outline-none animate-modal-in',
                     'max-h-[92dvh] overflow-y-auto scrollbar-thin',
                     'rounded-t-[28px] sm:rounded-[28px]',
+                    'bg-white shadow-pop',
+                    'border border-neutral-200/60',
                     SIZES[size],
                     className
                 )}
@@ -54,7 +56,7 @@ const Modal = ({ open, onClose, size = 'md', children, className, labelledBy }) 
                     <button
                         onClick={onClose}
                         aria-label="Kapat"
-                        className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-neutral-100/90 text-neutral-500 transition-colors hover:bg-neutral-200 hover:text-neutral-800"
+                        className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-neutral-100 text-neutral-500 transition-all hover:bg-neutral-200 hover:text-neutral-800 hover:scale-110 active:scale-90"
                     >
                         <X size={17} strokeWidth={2.4} />
                     </button>

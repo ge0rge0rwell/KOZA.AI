@@ -173,7 +173,9 @@ const CreatePage = () => {
             {/* ---------- Sonuç ekranı ---------- */}
             {result ? (
                 <div className="space-y-5 pt-4 text-center animate-scale-in">
-                    <CocoonVisual stage={5} size={170} className="mx-auto" />
+                    <div className="mx-auto w-fit" style={{ filter: 'drop-shadow(0 0 24px rgba(132,112,232,0.35))' }}>
+                        <CocoonVisual stage={5} size={170} />
+                    </div>
                     <div>
                         <Badge tone="primary" className="mb-3">{resultMeta.emoji} {resultMeta.label} hazır</Badge>
                         <h1 className="mb-2 text-3xl font-extrabold tracking-tight">{result.title}</h1>
@@ -230,15 +232,17 @@ const CreatePage = () => {
                                         aria-checked={type === t.id}
                                         onClick={() => { setType(t.id); setWizardKey(k => k + 1); }}
                                         className={cn(
-                                            'card p-5 text-left transition-all duration-300',
+                                            'card group p-5 text-left transition-all duration-300',
                                             type === t.id
-                                                ? 'border-primary-400 ring-4 ring-primary-100 shadow-card'
-                                                : 'hover:border-neutral-300 hover:shadow-card'
+                                                ? 'border-primary-300 shadow-[0_0_0_4px_rgba(132,112,232,0.12),var(--shadow-card)]'
+                                                : 'hover:border-primary-200 hover:shadow-card'
                                         )}
                                     >
                                         <span className={cn(
-                                            'mb-3 flex h-10 w-10 items-center justify-center rounded-xl transition-colors',
-                                            type === t.id ? 'bg-primary-600 text-white' : 'bg-neutral-100 text-neutral-500'
+                                            'mb-3 flex h-10 w-10 items-center justify-center rounded-xl transition-all duration-300',
+                                            type === t.id
+                                                ? 'bg-gradient-to-b from-primary-500 to-primary-700 text-white shadow-[0_2px_8px_-2px_rgba(106,82,220,0.5)]'
+                                                : 'bg-neutral-100 text-neutral-500 group-hover:bg-neutral-200'
                                         )}>
                                             <t.icon size={19} strokeWidth={2.2} />
                                         </span>

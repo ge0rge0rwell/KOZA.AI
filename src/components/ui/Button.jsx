@@ -4,14 +4,14 @@ import { cn } from '../../utils/helpers';
 
 const VARIANTS = {
     primary:
-        'bg-primary-600 text-white shadow-[0_1px_2px_rgba(58,48,125,0.3),0_4px_14px_-4px_rgba(106,82,220,0.5)] hover:bg-primary-700 active:scale-[0.98]',
+        'bg-gradient-to-b from-primary-500 to-primary-700 text-white shadow-[0_1px_2px_rgba(58,48,125,0.3),0_4px_16px_-4px_rgba(106,82,220,0.55),inset_0_1px_0_rgba(255,255,255,0.18)] hover:from-primary-600 hover:to-primary-800 active:scale-[0.97]',
     accent:
-        'bg-accent-500 text-white shadow-[0_4px_14px_-4px_rgba(201,122,28,0.5)] hover:bg-accent-600 active:scale-[0.98]',
+        'bg-gradient-to-b from-accent-400 to-accent-600 text-white shadow-[0_1px_2px_rgba(100,60,10,0.2),0_4px_16px_-4px_rgba(201,122,28,0.55),inset_0_1px_0_rgba(255,255,255,0.18)] hover:from-accent-500 hover:to-accent-700 active:scale-[0.97]',
     secondary:
-        'bg-white text-neutral-800 border border-neutral-200 shadow-soft hover:border-neutral-300 hover:bg-neutral-50 active:scale-[0.98]',
-    ghost: 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 active:scale-[0.98]',
-    soft: 'bg-primary-50 text-primary-700 hover:bg-primary-100 active:scale-[0.98]',
-    danger: 'bg-danger-50 text-danger-600 hover:bg-danger-100 active:scale-[0.98]',
+        'bg-white text-neutral-800 border border-neutral-200 shadow-soft hover:border-primary-200 hover:bg-neutral-50 hover:shadow-card active:scale-[0.97]',
+    ghost: 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 active:scale-[0.97]',
+    soft: 'bg-primary-50 text-primary-700 hover:bg-primary-100 active:scale-[0.97]',
+    danger: 'bg-danger-50 text-danger-600 hover:bg-danger-100 active:scale-[0.97]',
 };
 
 const SIZES = {
@@ -27,7 +27,7 @@ const Button = React.forwardRef(
             disabled={disabled || loading}
             className={cn(
                 'inline-flex items-center justify-center rounded-full font-bold tracking-tight select-none',
-                'transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none',
+                'transition-all duration-200 ease-out disabled:opacity-50 disabled:pointer-events-none',
                 VARIANTS[variant],
                 SIZES[size],
                 className

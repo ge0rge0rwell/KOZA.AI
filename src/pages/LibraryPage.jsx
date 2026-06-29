@@ -94,8 +94,8 @@ const LibraryPage = () => {
                                 >
                                     <div className="mb-3 flex items-center justify-between">
                                         <span
-                                            className="flex h-11 w-11 items-center justify-center rounded-xl"
-                                            style={{ background: `${c.themeColor || '#6A52DC'}14`, color: c.themeColor || '#6A52DC' }}
+                                            className="flex h-11 w-11 items-center justify-center rounded-xl shadow-sm transition-transform duration-300 group-hover:scale-105"
+                                            style={{ background: `linear-gradient(145deg, ${c.themeColor || '#6A52DC'}22, ${c.themeColor || '#6A52DC'}14)`, color: c.themeColor || '#6A52DC', boxShadow: `0 2px 8px -2px ${c.themeColor || '#6A52DC'}33` }}
                                         >
                                             <Icon size={19} />
                                         </span>

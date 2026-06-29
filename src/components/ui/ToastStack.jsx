@@ -4,11 +4,11 @@ import { useUI } from '../../context/UIContext';
 import { cn } from '../../utils/helpers';
 
 const STYLE = {
-    success: { icon: CheckCircle2, ring: 'bg-success-50 text-success-600' },
-    info: { icon: Info, ring: 'bg-info-50 text-info-600' },
-    error: { icon: AlertTriangle, ring: 'bg-danger-50 text-danger-600' },
-    oz: { icon: Sparkles, ring: 'bg-accent-50 text-accent-600' },
-    achievement: { icon: Trophy, ring: 'bg-primary-50 text-primary-600' },
+    success: { icon: CheckCircle2, ring: 'bg-success-50 text-success-600', accent: '#34955D' },
+    info: { icon: Info, ring: 'bg-info-50 text-info-600', accent: '#3C8DC5' },
+    error: { icon: AlertTriangle, ring: 'bg-danger-50 text-danger-600', accent: '#F43F5E' },
+    oz: { icon: Sparkles, ring: 'bg-accent-50 text-accent-600', accent: '#E29A28' },
+    achievement: { icon: Trophy, ring: 'bg-primary-50 text-primary-600', accent: '#6A52DC' },
 };
 
 const ToastStack = () => {
@@ -22,7 +22,8 @@ const ToastStack = () => {
                 return (
                     <div
                         key={t.id}
-                        className="pointer-events-auto flex w-full max-w-sm items-start gap-3 rounded-2xl border border-neutral-200/80 bg-white/95 p-3.5 shadow-lift backdrop-blur-xl animate-toast-in"
+                        className="pointer-events-auto flex w-full max-w-sm items-start gap-3 rounded-2xl bg-white/98 p-3.5 shadow-lift backdrop-blur-xl animate-toast-in"
+                        style={{ border: `1px solid ${(STYLE[t.type] || STYLE.info).accent}22`, boxShadow: `0 0 0 1px ${(STYLE[t.type] || STYLE.info).accent}10, 0 12px 32px -8px rgba(33,30,42,0.14)` }}
                     >
                         <span className={cn('flex h-9 w-9 shrink-0 items-center justify-center rounded-xl', ring)}>
                             <Icon size={18} strokeWidth={2.2} />

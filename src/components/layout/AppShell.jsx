@@ -19,11 +19,12 @@ const NavItem = ({ icon: Icon, label, active, onClick, badge }) => (
         onClick={onClick}
         aria-current={active ? 'page' : undefined}
         className={cn(
-            'group flex w-full items-center gap-3 rounded-2xl px-3.5 py-2.5 text-left text-sm font-bold transition-all duration-200',
-            active ? 'bg-primary-50 text-primary-700' : 'text-neutral-500 hover:bg-neutral-100 hover:text-neutral-800'
+            'group relative flex w-full items-center gap-3 rounded-2xl px-3.5 py-2.5 text-left text-sm font-bold transition-all duration-200',
+            active ? 'bg-primary-50 text-primary-700 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]' : 'text-neutral-500 hover:bg-neutral-100/80 hover:text-neutral-800'
         )}
     >
-        <Icon size={19} strokeWidth={2.2} className={cn('transition-transform duration-300', !active && 'group-hover:scale-110')} />
+        {active && <span className="absolute inset-y-2.5 left-0 w-[3px] rounded-r-full bg-primary-500" aria-hidden />}
+        <Icon size={19} strokeWidth={active ? 2.4 : 2.2} className={cn('transition-all duration-300', !active && 'group-hover:scale-110', active && 'text-primary-600')} />
         <span className="flex-1">{label}</span>
         {badge}
     </button>
@@ -33,9 +34,9 @@ const OzChip = ({ totalOz, onClick }) => (
     <button
         onClick={onClick}
         title="Toplam ÖZ puanın"
-        className="flex items-center gap-1.5 rounded-full border border-accent-200 bg-accent-50 px-3 py-1.5 text-[13px] font-extrabold text-accent-700 transition-transform hover:scale-105 active:scale-95"
+        className="flex items-center gap-1.5 rounded-full border border-accent-200 bg-gradient-to-r from-accent-50 to-amber-50 px-3 py-1.5 text-[13px] font-extrabold text-accent-700 transition-all hover:scale-105 hover:border-accent-300 hover:shadow-[0_0_0_3px_rgba(226,154,40,0.12)] active:scale-95"
     >
-        <Sparkles size={14} strokeWidth={2.4} />
+        <Sparkles size={14} strokeWidth={2.4} className="text-accent-500" />
         <span className="tabular-nums">{totalOz.toLocaleString('tr-TR')}</span>
         <span className="text-[10px] font-bold opacity-70">ÖZ</span>
     </button>
@@ -78,11 +79,12 @@ const AppShell = ({ children }) => {
                     {profile.plan !== 'school' && (
                         <button
                             onClick={() => openModal('upgrade')}
-                            className="group w-full overflow-hidden rounded-2xl bg-gradient-to-br from-primary-600 to-primary-800 p-4 text-left text-white shadow-card transition-transform hover:scale-[1.02] active:scale-[0.99]"
+                            className="group grain w-full overflow-hidden rounded-2xl bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 p-4 text-left text-white shadow-card transition-all hover:scale-[1.02] hover:shadow-lift active:scale-[0.99]"
                         >
                             <div className="mb-1 flex items-center gap-2">
                                 <School size={16} className="text-accent-300" />
                                 <span className="text-sm font-extrabold">KOZA Okul</span>
+                                <span className="ml-auto rounded-full bg-accent-400/20 px-2 py-0.5 text-[10px] font-extrabold text-accent-300">YENİ</span>
                             </div>
                             <p className="text-xs leading-relaxed text-white/70">Rehberlik servisi için anonim analiz panelini okuluna getir.</p>
                         </button>
@@ -152,9 +154,9 @@ const AppShell = ({ children }) => {
                             onClick={() => navigate('olustur')}
                             aria-label="Yeni dönüşüm oluştur"
                             className={cn(
-                                'absolute -top-9 flex h-14 w-14 items-center justify-center rounded-full text-white shadow-lift transition-all active:scale-90',
-                                'bg-gradient-to-br from-primary-500 to-primary-700',
-                                isActive('olustur') && 'ring-4 ring-primary-200'
+                                'absolute -top-9 flex h-14 w-14 items-center justify-center rounded-full text-white transition-all active:scale-90',
+                                'bg-gradient-to-b from-primary-500 to-primary-700',
+                                isActive('olustur') ? 'ring-4 ring-primary-200 shadow-lift' : 'animate-fab-ring'
                             )}
                         >
                             <Plus size={26} strokeWidth={2.5} />
@@ -180,11 +182,14 @@ const TabButton = ({ icon: Icon, label, active, onClick }) => (
             active ? 'text-primary-600' : 'text-neutral-400 active:text-neutral-600'
         )}
     >
-        <span className={cn('transition-transform duration-200', active ? 'scale-110' : '')}>
-            <Icon size={21} strokeWidth={active ? 2.4 : 2} />
+        <span className={cn(
+            'flex h-8 w-10 items-center justify-center rounded-xl transition-all duration-200',
+            active ? 'scale-110 bg-primary-50' : 'hover:bg-neutral-100'
+        )}>
+            <Icon size={20} strokeWidth={active ? 2.4 : 2} />
         </span>
-        <span className={cn('text-[10px] transition-all duration-200', active ? 'font-extrabold' : 'font-bold')}>{label}</span>
-        {active && <span className="absolute -top-0.5 h-1 w-4 rounded-full bg-primary-500" aria-hidden />}
+        <span className={cn('text-[10px] transition-all duration-200', active ? 'font-extrabold text-primary-600' : 'font-bold')}>{label}</span>
+        {active && <span className="absolute bottom-0 h-[3px] w-6 rounded-full bg-primary-500" aria-hidden />}
     </button>
 );
 

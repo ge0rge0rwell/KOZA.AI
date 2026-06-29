@@ -204,3 +204,49 @@ ${examples}
 
 ━━━ KALİTE REFERANSI SONU ━━━\n`;
 }
+
+/**
+ * Belirtilen hikâye anlarına göre filtreli fragment getirme.
+ * Her bölüm (A/B/C) kendi anlarına uyan referansları alır.
+ *
+ * @param {string}   userInput
+ * @param {string}   category   detectCategory() çıktısı
+ * @param {string[]} moments    İstenen storyMoment etiketleri
+ * @param {number}   count
+ */
+export function retrieveFragmentsByMoments(userInput, category, moments, count = 2) {
+  const feelingsText = extractField(userInput, 'NASIL HİSSETTİRDİ')
+    || extractField(userInput, 'NEDEN ZOR GELDİ')
+    || userInput;
+  const emotions = detectEmotions(feelingsText + ' ' + extractField(userInput, 'NE OLDU'));
+
+  const momentSet = new Set(moments);
+  const candidates = SEED_FRAGMENTS.filter(f => momentSet.has(f.storyMoment));
+
+  // Moment kümesinde fragment yoksa genel kütüphaneye dön
+  if (!candidates.length) return retrieveFragments(userInput, category, count);
+
+  const scored = candidates
+    .map(f => ({ f, score: scoreFragment(f, category, emotions) }))
+    .sort((a, b) => b.score - a.score);
+
+  const selected = [];
+  const usedMoments = new Set();
+
+  for (const { f } of scored) {
+    if (selected.length >= count) break;
+    if (!usedMoments.has(f.storyMoment)) {
+      selected.push(f);
+      usedMoments.add(f.storyMoment);
+    }
+  }
+
+  if (selected.length < count) {
+    for (const { f } of scored) {
+      if (selected.length >= count) break;
+      if (!selected.includes(f)) selected.push(f);
+    }
+  }
+
+  return selected;
+}

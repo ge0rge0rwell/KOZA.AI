@@ -28,27 +28,34 @@ const StageCelebration = () => {
 
     return (
         <div
-            className="fixed inset-0 z-[95] flex items-center justify-center bg-neutral-950/65 px-5 backdrop-blur-md animate-fade-in"
+            className="fixed inset-0 z-[95] flex items-center justify-center bg-neutral-950/70 px-5 backdrop-blur-md animate-fade-in"
             role="dialog"
             aria-modal="true"
             aria-label="Yeni aşama kutlaması"
         >
-            <div className="card w-full max-w-md p-8 text-center animate-scale-in sm:p-10">
+            <div
+                className="grain relative w-full max-w-md overflow-hidden rounded-[1.75rem] p-8 text-center animate-scale-in sm:p-10"
+                style={{
+                    background: `linear-gradient(160deg, white 0%, ${stage.color}08 100%)`,
+                    border: `1px solid ${stage.color}30`,
+                    boxShadow: `0 0 0 1px ${stage.color}18, 0 24px 64px -16px ${stage.color}40, 0 0 0 8px ${stage.color}08`,
+                }}
+            >
                 <p
-                    className="mb-3 text-[11px] font-extrabold uppercase tracking-[0.25em]"
+                    className="mb-3 text-[11px] font-extrabold uppercase tracking-[0.3em]"
                     style={{ color: stage.color }}
                 >
-                    Aşama {stage.n} / 7 açıldı
+                    ✦ Aşama {stage.n} / 7 açıldı ✦
                 </p>
                 <div
                     className="mx-auto mb-4 w-fit"
-                    style={{ filter: `drop-shadow(0 0 28px ${stage.color}50)` }}
+                    style={{ filter: `drop-shadow(0 0 32px ${stage.color}60)` }}
                 >
                     <CocoonVisual stage={stage.n} size={220} />
                 </div>
                 <h2
-                    className="mb-2 text-3xl font-extrabold tracking-tight animate-scale-in"
-                    style={{ color: stage.color }}
+                    className="mb-2 text-3xl font-extrabold tracking-tight animate-rise-in"
+                    style={{ color: stage.color, animationDelay: '0.15s' }}
                 >
                     {stage.name}
                 </h2>

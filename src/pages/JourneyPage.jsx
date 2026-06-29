@@ -103,7 +103,7 @@ const JourneyPage = () => {
                                     className={cn(
                                         'relative z-10 mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 text-sm font-extrabold transition-all',
                                         isCurrent
-                                            ? 'border-primary-500 bg-primary-600 text-white shadow-glow'
+                                            ? 'border-primary-400 bg-gradient-to-b from-primary-500 to-primary-700 text-white shadow-glow animate-pulse-soft'
                                             : reached
                                                 ? 'border-primary-300 bg-primary-100 text-primary-700'
                                                 : 'border-neutral-200 bg-white text-neutral-300'
@@ -185,7 +185,12 @@ const JourneyPage = () => {
                         return (
                             <Card
                                 key={a.id}
-                                className={cn('relative p-4 text-center transition-all', unlocked ? 'border-accent-200' : 'opacity-55 grayscale')}
+                                className={cn(
+                                    'relative p-4 text-center transition-all',
+                                    unlocked
+                                        ? 'border-accent-200 shadow-[var(--shadow-soft),0_0_0_3px_rgba(226,154,40,0.1)]'
+                                        : 'opacity-50 grayscale'
+                                )}
                             >
                                 {!unlocked && <Lock size={12} className="absolute right-3 top-3 text-neutral-300" />}
                                 <span className="mb-2 block text-3xl" aria-hidden>{a.icon}</span>

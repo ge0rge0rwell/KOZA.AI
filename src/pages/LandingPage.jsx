@@ -14,6 +14,62 @@ import { SAFETY_DISCLAIMER, CATEGORIES } from '../config/constants';
 import { SEED_COMMUNITY } from '../config/seedContent';
 import { cn, truncate } from '../utils/helpers';
 
+const DEMO_PAIRS = [
+    {
+        input: '"Sınıfta herkes güldü. Ben sadece anneme yardım etmek istemiştim..."',
+        title: '"Koridordaki Kahraman"',
+        sub: 'Bir sevginin en güçlü koza hâli 🦋',
+    },
+    {
+        input: '"Grup sohbetine eklenmiyordum. Sanki yokmuşum gibi..."',
+        title: '"Görünmezlik Kalkanı"',
+        sub: 'Sessizliği güce dönüştüren yolculuk 💙',
+    },
+    {
+        input: '"Bana lakap taktılar, okula gitmek istemiyorum artık..."',
+        title: '"Lakabın Gölgesi"',
+        sub: 'Kelimeler iz bırakır; kahraman güçlenir 🔮',
+    },
+    {
+        input: '"Fotoğrafımı izinsiz paylaştılar, korku içindeyim..."',
+        title: '"Ekranın Ötesi"',
+        sub: 'Dijital karanlıkta açılan bir kanat ⚡',
+    },
+];
+
+const TransformPreview = () => {
+    const [idx, setIdx] = useState(0);
+    const [visible, setVisible] = useState(true);
+    useEffect(() => {
+        let timeout;
+        const t = setInterval(() => {
+            setVisible(false);
+            timeout = setTimeout(() => {
+                setIdx((i) => (i + 1) % DEMO_PAIRS.length);
+                setVisible(true);
+            }, 380);
+        }, 4200);
+        return () => { clearInterval(t); clearTimeout(timeout); };
+    }, []);
+    const pair = DEMO_PAIRS[idx];
+    return (
+        <div className="flex items-center gap-2 rounded-2xl border border-neutral-200/80 bg-white/85 p-4 text-left backdrop-blur-md shadow-card">
+            <div className="flex-1 min-w-0 rounded-xl bg-neutral-50 p-3 transition-opacity duration-[350ms]" style={{ opacity: visible ? 1 : 0 }}>
+                <p className="mb-1 text-[10px] font-extrabold uppercase tracking-wider text-neutral-400">Deneyim</p>
+                <p className="text-[12px] leading-relaxed text-neutral-600 italic">{pair.input}</p>
+            </div>
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-b from-primary-400 to-primary-600 shadow-[0_2px_8px_-2px_rgba(106,82,220,0.45)] animate-pulse-soft">
+                <Sparkles size={13} className="text-white" />
+            </div>
+            <div className="flex-1 min-w-0 rounded-xl bg-gradient-to-br from-primary-50 to-primary-100/60 p-3 transition-opacity duration-[350ms]" style={{ opacity: visible ? 1 : 0 }}>
+                <p className="mb-1 text-[10px] font-extrabold uppercase tracking-wider text-primary-500">Dönüşüm</p>
+                <p className="text-[13px] font-extrabold text-primary-900">{pair.title}</p>
+                <p className="text-[12px] text-primary-500">{pair.sub}</p>
+            </div>
+        </div>
+    );
+};
+
 /* ---------- Kahraman görseli: koza→kelebek döngüsü ---------- */
 const HeroVisual = () => {
     const [stage, setStage] = useState(1);
@@ -22,15 +78,20 @@ const HeroVisual = () => {
         return () => clearInterval(t);
     }, []);
     return (
-        <div className="relative mx-auto flex h-[280px] w-[280px] items-center justify-center sm:h-[340px] sm:w-[340px]">
-            <CocoonVisual stage={stage} size={300} className="transition-all duration-700" />
-            <div className="absolute -bottom-1 left-1/2 flex -translate-x-1/2 gap-1.5">
+        <div className="relative mx-auto flex items-center justify-center" style={{ width: 420, height: 420 }}>
+            {/* Glow backdrop */}
+            <div className="absolute inset-0 rounded-full" style={{ background: 'radial-gradient(circle at 50% 50%, rgba(132,112,232,0.22) 0%, rgba(226,154,40,0.10) 50%, transparent 72%)', filter: 'blur(24px)' }} aria-hidden />
+            {/* Concentric rings */}
+            <div className="absolute inset-6 rounded-full border border-primary-200/30" style={{ borderColor: 'rgba(132,112,232,0.18)' }} aria-hidden />
+            <div className="absolute inset-14 rounded-full border" style={{ borderColor: 'rgba(132,112,232,0.12)' }} aria-hidden />
+            <CocoonVisual stage={stage} size={400} className="relative transition-all duration-700" />
+            <div className="absolute -bottom-2 left-1/2 flex -translate-x-1/2 gap-2">
                 {Array.from({ length: 7 }).map((_, i) => (
                     <span
                         key={i}
                         className={cn(
                             'h-1.5 rounded-full transition-all duration-500',
-                            i + 1 === stage ? 'w-6 bg-primary-500' : 'w-1.5 bg-neutral-200'
+                            i + 1 === stage ? 'w-7 bg-primary-500' : 'w-1.5 bg-neutral-200'
                         )}
                     />
                 ))}
@@ -120,9 +181,11 @@ const LandingPage = () => {
             <header className="fixed inset-x-0 top-0 z-50 border-b border-neutral-200/60 surface-tint">
                 <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
                     <Logo size="md" />
-                    <nav className="hidden items-center gap-7 text-sm font-bold text-neutral-500 md:flex" aria-label="Sayfa içi">
+                    <nav className="hidden items-center gap-6 text-sm font-bold text-neutral-500 md:flex" aria-label="Sayfa içi">
+                        <a href="#bilim" className="transition-colors hover:text-neutral-900">Bilim</a>
                         <a href="#nasil" className="transition-colors hover:text-neutral-900">Nasıl çalışır?</a>
                         <a href="#ozellikler" className="transition-colors hover:text-neutral-900">Özellikler</a>
+                        <a href="#tankliklar" className="transition-colors hover:text-neutral-900">Tanıklıklar</a>
                         <a href="#guven" className="transition-colors hover:text-neutral-900">Güvenlik</a>
                         <a href="#sss" className="transition-colors hover:text-neutral-900">SSS</a>
                     </nav>
@@ -132,16 +195,19 @@ const LandingPage = () => {
 
             <main>
                 {/* ---------- Kahraman ---------- */}
-                <section className="relative px-5 pb-20 pt-32 sm:pt-40">
-                    <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
+                <section className="relative overflow-hidden px-5 pb-24 pt-28 sm:pt-36">
+                    {/* Dramatic hero background */}
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-primary-50/70 via-neutral-50/40 to-neutral-50" aria-hidden />
+                    <div className="pointer-events-none absolute -top-40 left-1/2 h-[800px] w-[800px] -translate-x-1/2 rounded-full" style={{ background: 'radial-gradient(circle, rgba(132,112,232,0.12) 0%, transparent 65%)' }} aria-hidden />
+                    <div className="mx-auto grid max-w-6xl items-center gap-8 lg:grid-cols-2">
                         <div className="text-center lg:text-left">
-                            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary-200 bg-primary-50 px-4 py-1.5 text-[12px] font-extrabold text-primary-700 animate-rise-in">
-                                <VenetianMask size={14} />
+                            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary-200/80 bg-gradient-to-r from-primary-50 to-primary-100/60 px-4 py-1.5 text-[12px] font-extrabold text-primary-700 shadow-[0_0_0_4px_rgba(132,112,232,0.06)] animate-rise-in">
+                                <VenetianMask size={14} className="text-primary-500" />
                                 Anonim · Empati temelli · Ücretsiz
                                 <span className="h-3 w-px bg-primary-300" aria-hidden />
-                                <span className="text-primary-500">TEKNOFEST 2026</span>
+                                <span className="rounded-full bg-primary-600 px-2 py-0.5 text-[10px] text-white">TEKNOFEST 2026</span>
                             </div>
-                            <h1 className="mb-6 text-4xl font-extrabold leading-[1.08] tracking-tight text-neutral-900 sm:text-5xl lg:text-[56px] animate-rise-in" style={{ animationDelay: '0.08s' }}>
+                            <h1 className="mb-6 text-[2.6rem] font-extrabold leading-[1.06] tracking-tight text-neutral-900 sm:text-5xl lg:text-[62px] animate-rise-in" style={{ animationDelay: '0.08s' }}>
                                 Zorbalık hikâyenin sonu değil.{' '}
                                 <span className="text-gradient">Sadece bir koza evresi.</span>
                             </h1>
@@ -165,6 +231,10 @@ const LandingPage = () => {
                                     📚 Anlatı Terapisi × Yapay Zekâ · Hemhal Takımı
                                 </p>
                             </div>
+                            {/* Canlı dönüşüm önizlemesi */}
+                            <div className="mt-6 animate-rise-in hidden sm:block" style={{ animationDelay: '0.38s' }}>
+                                <TransformPreview />
+                            </div>
                         </div>
                         <div className="animate-scale-in" style={{ animationDelay: '0.2s' }}>
                             <HeroVisual />
@@ -173,29 +243,33 @@ const LandingPage = () => {
                 </section>
 
                 {/* ---------- Güven şeridi ---------- */}
-                <section className="border-y border-neutral-200/70 bg-white/60 py-6 backdrop-blur-sm">
-                    <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-x-12 gap-y-3 px-5 text-[13px] font-extrabold text-neutral-500">
-                        <span className="flex items-center gap-2"><Lock size={15} className="text-primary-500" /> Anonim kimlik</span>
-                        <span className="flex items-center gap-2"><Sparkles size={15} className="text-accent-500" /> Anlatı Terapisi × Yapay Zekâ</span>
-                        <span className="flex items-center gap-2"><ShieldCheck size={15} className="text-success-500" /> Güvenli içerik filtreleri</span>
-                        <span className="flex items-center gap-2"><HeartHandshake size={15} className="text-danger-500" /> 7/24 destek kaynakları</span>
+                <section className="border-y border-neutral-200/70 bg-white/70 py-5 backdrop-blur-sm">
+                    <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-x-10 gap-y-3 px-5 text-[13px] font-extrabold text-neutral-500">
+                        <span className="flex items-center gap-2 rounded-full px-3 py-1.5 transition-colors hover:bg-primary-50 hover:text-primary-700"><Lock size={14} className="text-primary-500" /> Anonim kimlik</span>
+                        <span className="h-3.5 w-px bg-neutral-200" aria-hidden />
+                        <span className="flex items-center gap-2 rounded-full px-3 py-1.5 transition-colors hover:bg-accent-50 hover:text-accent-700"><Sparkles size={14} className="text-accent-500" /> Anlatı Terapisi × Yapay Zekâ</span>
+                        <span className="h-3.5 w-px bg-neutral-200" aria-hidden />
+                        <span className="flex items-center gap-2 rounded-full px-3 py-1.5 transition-colors hover:bg-success-50 hover:text-success-700"><ShieldCheck size={14} className="text-success-500" /> Güvenli içerik filtreleri</span>
+                        <span className="h-3.5 w-px bg-neutral-200" aria-hidden />
+                        <span className="flex items-center gap-2 rounded-full px-3 py-1.5 transition-colors hover:bg-danger-50 hover:text-danger-600"><HeartHandshake size={14} className="text-danger-500" /> 7/24 destek kaynakları</span>
                     </div>
                 </section>
 
                 {/* ---------- Problem Büyüklüğü ---------- */}
-                <section className="bg-neutral-900 px-5 py-20">
-                    <div className="mx-auto max-w-6xl">
+                <section className="relative overflow-hidden bg-neutral-900 px-5 py-20">
+                    <div className="dot-pattern absolute inset-0" aria-hidden />
+                    <div className="relative mx-auto max-w-6xl">
                         <div className="mb-12 text-center">
                             <p className="mb-2 text-[11px] font-extrabold uppercase tracking-[0.25em] text-primary-400">Neden şimdi?</p>
                             <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl">Türkiye'de akran zorbalığı gerçeği</h2>
                         </div>
                         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 stagger-children">
                             {PROBLEM_STATS.map((s) => (
-                                <div key={s.value} className="rounded-2xl border border-neutral-700 bg-neutral-800/60 p-7 text-center">
+                                <div key={s.value} className="rounded-2xl border border-neutral-700/80 bg-neutral-800/50 p-7 text-center backdrop-blur-sm transition-all hover:border-primary-700/50 hover:bg-neutral-800/70">
                                     <p className="mb-1 text-4xl font-extrabold tracking-tight text-primary-400">{s.value}</p>
                                     <p className="mb-2 font-extrabold text-white text-[15px]">{s.label}</p>
                                     <p className="text-[13px] leading-relaxed text-neutral-400">{s.sub}</p>
-                                    <p className="mt-4 border-t border-neutral-700 pt-3 text-[10px] font-extrabold uppercase tracking-widest text-neutral-600">{s.source}</p>
+                                    <p className="mt-4 border-t border-neutral-700/60 pt-3 text-[10px] font-extrabold uppercase tracking-widest text-neutral-600">{s.source}</p>
                                 </div>
                             ))}
                         </div>
@@ -229,27 +303,27 @@ const LandingPage = () => {
                 </section>
 
                 {/* ---------- Bilimsel Temel ---------- */}
-                <section className="bg-white/60 px-5 py-20">
+                <section id="bilim" className="bg-white/60 px-5 py-20">
                     <div className="mx-auto max-w-6xl">
                         <div className="mb-12 text-center animate-rise-in">
                             <p className="mb-2 text-[11px] font-extrabold uppercase tracking-[0.25em] text-primary-500">Kanıta dayalı yaklaşım</p>
                             <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl">Arkasındaki bilim</h2>
                         </div>
                         <div className="grid gap-5 md:grid-cols-3 stagger-children">
-                            <div className="card p-7">
-                                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-50 text-xl">📖</div>
+                            <div className="card card-hover p-7">
+                                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-b from-primary-50 to-primary-100 text-xl shadow-[0_2px_8px_-2px_rgba(106,82,220,0.15)]">📖</div>
                                 <h3 className="mb-2 font-extrabold text-neutral-900">Anlatı Terapisi</h3>
                                 <p className="text-sm leading-relaxed text-neutral-500">White & Epston (1990) tarafından geliştirilen kanıta dayalı psikoterapi yaklaşımı. Zorbalık deneyimini "ben budur" olmaktan çıkarır; kahramanı mağdur değil, dönüşen özne olarak konumlar.</p>
                                 <p className="mt-4 border-t border-neutral-100 pt-3 text-[11px] font-extrabold tracking-wider text-neutral-300">White & Epston, 1990</p>
                             </div>
-                            <div className="card p-7">
-                                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-50 text-xl">🤖</div>
+                            <div className="card card-hover p-7">
+                                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-b from-accent-50 to-amber-100 text-xl shadow-[0_2px_8px_-2px_rgba(226,154,40,0.2)]">🤖</div>
                                 <h3 className="mb-2 font-extrabold text-neutral-900">3 Aşamalı AI Hattı</h3>
                                 <p className="text-sm leading-relaxed text-neutral-500">Mimari analiz → üretim → editoryal kontrol. Her eser üç bağımsız AI çağrısından geçer. Kriz tespiti üretimden önce çalışır; terapötik doğruluk algoritmik olarak güvence altında.</p>
                                 <p className="mt-4 border-t border-neutral-100 pt-3 text-[11px] font-extrabold tracking-wider text-neutral-300">RAG + LLM pipeline sistemi</p>
                             </div>
-                            <div className="card p-7">
-                                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-success-50 text-xl">🦋</div>
+                            <div className="card card-hover p-7">
+                                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-b from-success-50 to-success-100/80 text-xl shadow-[0_2px_8px_-2px_rgba(52,149,93,0.2)]">🦋</div>
                                 <h3 className="mb-2 font-extrabold text-neutral-900">Metamorfoz Oyunlaştırma</h3>
                                 <p className="text-sm leading-relaxed text-neutral-500">Self-determination theory (Deci & Ryan, 1985) temelinde 7 aşamalı ilerleme sistemi. Koza→kelebek metaforu, Anlatı Terapisi'nin "yeniden yazma" ilkesiyle birebir örtüşür.</p>
                                 <p className="mt-4 border-t border-neutral-100 pt-3 text-[11px] font-extrabold tracking-wider text-neutral-300">Deci & Ryan, 1985</p>
@@ -268,9 +342,9 @@ const LandingPage = () => {
                         <div className="grid gap-5 md:grid-cols-3 stagger-children">
                             {STEPS.map((s) => (
                                 <div key={s.n} className="card card-hover relative overflow-hidden p-8">
-                                    <span className="absolute -right-2 -top-4 text-[88px] font-extrabold leading-none text-neutral-100 select-none" aria-hidden>{s.n}</span>
+                                    <span className="absolute -right-2 -top-4 select-none text-[88px] font-extrabold leading-none text-gradient opacity-20" aria-hidden>{s.n}</span>
                                     <div className="relative">
-                                        <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-50 text-primary-600">
+                                        <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-b from-primary-400 to-primary-600 text-white shadow-[0_4px_12px_-4px_rgba(106,82,220,0.5),inset_0_1px_0_rgba(255,255,255,0.2)]">
                                             <s.icon size={22} strokeWidth={2.2} />
                                         </div>
                                         <h3 className="mb-2 text-lg font-extrabold">{s.title}</h3>
@@ -292,7 +366,7 @@ const LandingPage = () => {
                         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 stagger-children">
                             {FEATURES.map((f) => (
                                 <div key={f.title} className="card card-hover p-7">
-                                    <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-accent-50 text-accent-600">
+                                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-b from-accent-50 to-amber-100 text-accent-600 shadow-[0_2px_8px_-2px_rgba(226,154,40,0.25),inset_0_1px_0_rgba(255,255,255,0.9)]">
                                         <f.icon size={20} strokeWidth={2.2} />
                                     </div>
                                     <h3 className="mb-1.5 font-extrabold">{f.title}</h3>
@@ -304,7 +378,7 @@ const LandingPage = () => {
                 </section>
 
                 {/* ---------- Tanıklıklar ---------- */}
-                <section className="px-5 py-20 bg-white/50">
+                <section id="tankliklar" className="px-5 py-20 bg-white/50">
                     <div className="mx-auto max-w-6xl">
                         <div className="mb-12 text-center">
                             <p className="mb-2 text-[11px] font-extrabold uppercase tracking-[0.25em] text-primary-500">Gerçek sesler</p>
@@ -329,29 +403,31 @@ const LandingPage = () => {
                 <section className="px-5 py-14">
                     <div className="mx-auto max-w-4xl">
                         <p className="mb-6 text-center text-[11px] font-extrabold uppercase tracking-[0.25em] text-neutral-400">Geleneksel yaklaşımlardan farkı</p>
-                        <div className="card overflow-hidden">
-                            <div className="grid grid-cols-[100px_1fr_1fr] border-b border-neutral-100 bg-neutral-50/60 px-6 py-3 text-[11px] font-extrabold uppercase tracking-widest text-neutral-400">
-                                <span>Konu</span>
-                                <span className="text-neutral-300">Geleneksel</span>
-                                <span className="text-primary-600">KOZA</span>
-                            </div>
-                            {[
-                                ['Kimlik', 'Kayıt + isim zorunlu', 'Tek dokunuşla tam anonim'],
-                                ['Yöntem', 'Pasif şikayet formu', 'Aktif terapötik dönüşüm'],
-                                ['Motivasyon', 'Zorunlu kullanım', '7 aşamalı oyunlaştırma'],
-                                ['Rehber görünümü', 'Bireysel görüşmeye bağlı', 'Anonim eğilim analizi + öneri'],
-                                ['İçerik kalitesi', 'Standart yanıt şablonu', '3 aşamalı AI kalite hattı'],
-                            ].map(([topic, before, after]) => (
-                                <div key={topic} className="grid grid-cols-[100px_1fr_1fr] items-center gap-4 border-b border-neutral-100 px-6 py-4 last:border-0">
-                                    <span className="text-[11px] font-extrabold uppercase tracking-wider text-neutral-400">{topic}</span>
-                                    <span className="flex items-center gap-2 text-sm text-neutral-400">
-                                        <span className="shrink-0 font-extrabold text-neutral-300" aria-hidden>✗</span> {before}
-                                    </span>
-                                    <span className="flex items-center gap-2 text-sm font-bold text-primary-700">
-                                        <span className="shrink-0 font-extrabold text-success-500" aria-hidden>✓</span> {after}
-                                    </span>
+                        <div className="card overflow-hidden overflow-x-auto scrollbar-thin">
+                            <div className="min-w-[520px]">
+                                <div className="grid grid-cols-[90px_1fr_1fr] border-b border-neutral-100 bg-neutral-50/60 px-6 py-3 text-[11px] font-extrabold uppercase tracking-widest text-neutral-400">
+                                    <span>Konu</span>
+                                    <span className="text-neutral-300">Geleneksel</span>
+                                    <span className="text-primary-600">KOZA</span>
                                 </div>
-                            ))}
+                                {[
+                                    ['Kimlik', 'Kayıt + isim zorunlu', 'Tek dokunuşla tam anonim'],
+                                    ['Yöntem', 'Pasif şikayet formu', 'Aktif terapötik dönüşüm'],
+                                    ['Motivasyon', 'Zorunlu kullanım', '7 aşamalı oyunlaştırma'],
+                                    ['Rehber', 'Bireysel görüşmeye bağlı', 'Anonim eğilim analizi + öneri'],
+                                    ['AI Kalite', 'Standart yanıt şablonu', '3 aşamalı pipeline'],
+                                ].map(([topic, before, after]) => (
+                                    <div key={topic} className="grid grid-cols-[90px_1fr_1fr] items-center gap-4 border-b border-neutral-100 px-6 py-4 last:border-0">
+                                        <span className="text-[11px] font-extrabold uppercase tracking-wider text-neutral-400">{topic}</span>
+                                        <span className="flex items-start gap-2 text-sm text-neutral-400">
+                                            <span className="mt-px shrink-0 font-extrabold text-neutral-300" aria-hidden>✗</span> {before}
+                                        </span>
+                                        <span className="flex items-start gap-2 text-sm font-bold text-primary-700">
+                                            <span className="mt-px shrink-0 font-extrabold text-success-500" aria-hidden>✓</span> {after}
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -467,27 +543,52 @@ const LandingPage = () => {
                 {/* ---------- Son çağrı ---------- */}
                 <section className="px-5 pb-28 pt-6">
                     <div className="mx-auto max-w-4xl">
-                        <div className="card grain relative overflow-hidden bg-gradient-to-br from-primary-600 to-primary-800 px-8 py-16 text-center text-white">
-                            <h2 className="mb-4 text-3xl font-extrabold tracking-tight sm:text-4xl">Kozanın içinde bir kelebek var.</h2>
-                            <p className="mx-auto mb-9 max-w-md text-primary-100">Onu görmek için tek bir adım yeter — ve bu adım tamamen anonim.</p>
-                            <Button size="lg" variant="accent" iconRight={ArrowRight} onClick={() => setShowAuth(true)}>
-                                Yolculuğa Başla
-                            </Button>
+                        <div className="grain relative overflow-hidden rounded-[1.5rem] border border-primary-500/30 bg-gradient-to-br from-primary-500 via-primary-700 to-primary-900 px-8 py-16 text-center text-white shadow-[0_24px_64px_-16px_rgba(106,82,220,0.55)]">
+                            <div className="dot-pattern absolute inset-0 opacity-60" aria-hidden />
+                            <div className="relative">
+                                <p className="mb-3 text-[11px] font-extrabold uppercase tracking-[0.3em] text-primary-300">İnsanlık Yararına Teknoloji · TEKNOFEST 2026</p>
+                                <h2 className="mb-4 text-3xl font-extrabold tracking-tight sm:text-4xl">Kozanın içinde bir kelebek var.</h2>
+                                <p className="mx-auto mb-2 max-w-md text-primary-100">Onu görmek için tek bir adım yeter — ve bu adım tamamen anonim.</p>
+                                <p className="mx-auto mb-9 max-w-lg text-[13px] text-primary-300">
+                                    Her 3 öğrenciden birini etkileyen sessiz krize karşı: anlatı terapisi, yapay zekâ ve empatinin buluştuğu alan.
+                                </p>
+                                <Button size="lg" variant="accent" iconRight={ArrowRight} onClick={() => setShowAuth(true)}>
+                                    Yolculuğa Başla
+                                </Button>
+                                <div className="mt-10 flex flex-wrap items-center justify-center gap-6 border-t border-primary-500/40 pt-8 text-[12px] font-extrabold text-primary-300">
+                                    <span>📖 White & Epston, 1990</span>
+                                    <span className="h-3 w-px bg-primary-500/40" aria-hidden />
+                                    <span>🤖 3 Aşamalı AI Hattı</span>
+                                    <span className="h-3 w-px bg-primary-500/40" aria-hidden />
+                                    <span>🔒 Tam Anonim</span>
+                                    <span className="h-3 w-px bg-primary-500/40" aria-hidden />
+                                    <span>🦋 7 Dönüşüm Evresi</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
             </main>
 
             {/* ---------- Alt bilgi ---------- */}
-            <footer className="border-t border-neutral-200/70 bg-white/50 px-5 py-12">
-                <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 text-center">
+            <footer className="border-t border-neutral-200/70 bg-white/50 px-5 py-14">
+                <div className="mx-auto flex max-w-6xl flex-col items-center gap-5 text-center">
                     <Logo size="sm" />
+                    <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[12px] font-bold text-neutral-400">
+                        <span>📚 White & Epston, Anlatı Terapisi (1990)</span>
+                        <span>·</span>
+                        <span>🎯 Deci & Ryan, SDT (1985)</span>
+                        <span>·</span>
+                        <span>🛡 UNICEF Çocuk Hakları Sözleşmesi</span>
+                    </div>
                     <p className="max-w-md text-[12px] leading-relaxed text-neutral-400">
-                        {SAFETY_DISCLAIMER} Acil durumlarda <strong className="text-neutral-600">112</strong>'yi arayın,
-                        sosyal destek için <strong className="text-neutral-600">ALO 183</strong>'ü kullanın.
+                        {SAFETY_DISCLAIMER} Acil durumlarda <strong className="text-neutral-600">182</strong>'yi (İntihar Önleme Hattı) veya <strong className="text-neutral-600">ALO 183</strong>'ü (Aile ve Sosyal Hizmetler) arayın.
                     </p>
-                    <p className="text-[11px] font-bold tracking-widest text-neutral-300">
+                    <p className="text-[11px] font-extrabold tracking-widest text-neutral-300">
                         TEKNOFEST 2026 · İNSANLIK YARARINA TEKNOLOJİ · HEMHAL TAKIMI
+                    </p>
+                    <p className="text-[10px] font-bold text-neutral-200">
+                        kozateknofest@gmail.com
                     </p>
                 </div>
             </footer>

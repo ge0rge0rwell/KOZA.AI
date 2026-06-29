@@ -435,6 +435,398 @@ Kapıdan içeri girdi.`,
      EVRENSEL — Her kategoride kullanılabilir, yüksek kalite
      ══════════════════════════════════════════════════════════════ */
 
+  /* ══════════════════════════════════════════════════════════════
+     ALAY — Eksik anlar: body_next_day, open_road
+     ══════════════════════════════════════════════════════════════ */
+
+  {
+    id: 'alay_body_01',
+    category: 'alay',
+    emotionTags: ['utanc', 'caresizlik'],
+    storyMoment: 'body_next_day',
+    title: 'Lakap Sesi',
+    content: `Mehmet, sabah sınıfa girerken kapıda duraksadı. İçeriden sesler geliyordu — normal sesler, gülüşmeler, sandalye gıcırtıları. Ama içeri girmeden önce bir an bekledi.
+
+Bu beklemek yeniydi. Bir hafta önce yoktu.
+
+Masasına yürürken gözleri önünde duruyordu. Birisi bir şey söyledi — adını mı, lakapı mı, tam anlamadı. Sesi duydu ama anlamı gecikti.
+
+İlk hafta bu gecikme yoktu. Duyunca anında içinden geçiyordu. Şimdi bir saniye duraklamak bazen yetiyordu. Bu ilerleme miydi yoksa alışmak mıydı, Mehmet bilmiyordu.
+
+Masasına oturdu. Defterini çıkardı. Ders başladı.
+
+Öğretmen tahtaya bir şey yazdı ve Mehmet baktı — gerçekten baktı, takip etti, anlamaya çalıştı. Bu da yeniydi. Son haftalarda tahtaya bakıyor ama görmüyordu.
+
+Bugün gördü. Küçük bir şeydi bu ama buydu işte.`,
+  },
+
+  {
+    id: 'alay_open_01',
+    category: 'alay',
+    emotionTags: ['utanc', 'uzuntu'],
+    storyMoment: 'open_road',
+    title: 'Defterdeki Cümle',
+    content: `Mehmet o gün Türkçe dersinde kendi yazdığı bir cümleye baktı ve durdu.
+
+Cümle iyiydi. Öğretmen "güzel" demişti — sınıfın önünde okumamıştı, sadece defterine yazmıştı, ama "güzel" demişti.
+
+İki ay önce bu kelime farklı hissettirirdi. Her "güzel" başka bir şeyi de getirirdi — o lakap geliyor muydu, geliyor muydu? Artık bu döngü başlamıyordu hemen.
+
+Bugün "güzel" sadece güzeldi.
+
+Teneffüste dışarıya çıktı. Oyun grubuna katılmadı — katılmak istemiyordu, bu sefer kaçmak için değil, sadece istemediği için. Bu fark önemliydi. Hangisinin hangisi olduğunu artık anlayabiliyordu.
+
+Duvara yaslandı. Serin bir günün güneşi sırtını ısıttı. Gözlerini kapattı. O lakap aklına geldi — gelmemesi için çaba harcamadı, geldi. Ve bekledi. Ve geçti.
+
+Geçmesi daha önce bu kadar kolay değildi.`,
+  },
+
+  /* ══════════════════════════════════════════════════════════════
+     FİZİKSEL — Eksik anlar: the_moment, night_after, imperfect_step, open_road
+     ══════════════════════════════════════════════════════════════ */
+
+  {
+    id: 'fiziksel_moment_01',
+    category: 'fiziksel',
+    emotionTags: ['korku', 'utanc'],
+    storyMoment: 'the_moment',
+    title: 'İtilmek',
+    content: `Can, teneffüste koridordan geçerken ilk itişi hissetmedi tam olarak — anlamak birkaç saniye aldı.
+
+Omzuna bir el değdi, döndü. Üç kişi vardı. Ortadaki güldü. Can yüzlerine bakmak zorunda kalmamak için aşağıya baktı, ama gülüşme kulaklarda kaldı.
+
+"Nereye?" dedi biri.
+
+Can bir şey söylemedi. Cevap bulmak için aklı çalıştı ama kelimeler gelmedi. Gelseydi ne olacağını hesaplamak zaman aldığı için. Bu hesap yapılırken üç kişi çoktan geçip gitmişti.
+
+Koridorda kaldı. Çantasının askısını tuttu. Elinin titrediğini o zaman fark etti — hafifçe, ama yanlış yerde titriyordu.
+
+Bir öğrenci yanından geçti. Bir öğretmen kapısını kapattı. Zil bir dakika sonra çalacaktı.
+
+Can koridorun duvarına yaslandı. Nefes aldı. Verdi. Midesi yukarı çekiyordu.
+
+Zil çaldı. Derse girmek zorundaydı.`,
+  },
+
+  {
+    id: 'fiziksel_night_01',
+    category: 'fiziksel',
+    emotionTags: ['korku', 'uzuntu'],
+    storyMoment: 'night_after',
+    title: 'Çantayı Kaldırmak',
+    content: `Can, o gece çantasını odanın ortasına bıraktı. Normalde kapının yanına koyardı — yarın kolayca alabilmek için. Ama o gece kapının yanına götürmedi.
+
+Çantayı görünce bugünü hatırlıyordu.
+
+Masasına oturdu. Ödev vardı — matematikti. Kalemini açtı. Birinci soruyu okudu. İkinci kez okudu. Üçüncüde ne sorduğunu hâlâ anlamamıştı.
+
+Kalkıp yatağa uzandı.
+
+Tavanı izlerken koridor geldi aklına. Üç kişi. O gülüşme. Kendi elleri.
+
+Neden bir şey dememişti? Bu soruyu defalarca sordu kendine ve her seferinde farklı bir cevap geldi: söyleseydi daha kötü olurdu, söyleseydi çok belli olurdu. Belki hepsi doğruydu. Belki hiçbiri.
+
+Bir yerden ses geldi — TV belki. Normal bir ses. Dünya devam ediyordu dışarıda.
+
+Can gözlerini kapattı. Bugün olmuştu. Yarın da okula gidecekti. Bu ikisi aynı anda hem çok büyük hem çok küçük hissettirdi.`,
+  },
+
+  {
+    id: 'fiziksel_step_01',
+    category: 'fiziksel',
+    emotionTags: ['korku', 'caresizlik'],
+    storyMoment: 'imperfect_step',
+    title: 'Kâğıt',
+    content: `Can o sabah okula erken geldi — kasıtlı değil, otobüs erken gelmişti. Okul kapısında bekledi.
+
+Rehber öğretmenin odası oradaydı. Kapı kapalıydı.
+
+Bu kapıyı üç haftadır görmezden geliyordu. Bugün durdu önünde. Bir şey yazmayı düşündü — kâğıda, sadece ne olduğunu. Bazen yazmak söylemekten önceydi.
+
+Çantasından defterini çıkardı. Boş sayfa. Yazdı: "Koridorda itildim. Birden fazla kez oldu."
+
+Baktı buna. Kâğıtta duruyordu. Fazla dramatik görünüyor muydu? Az mı? İkisini de bilmiyordu.
+
+Defteri kapattı. Çantasına koydu.
+
+Kapı hâlâ kapalıydı. Zil on dakika sonra çalacaktı. Can bir süre kapıya baktı. Vurmadı.
+
+Ama yazdığı sayfa çantasındaydı. Bir gün vurmak isteyebilirdi. O zaman elinde somut bir şey olacaktı — belirsiz bir his değil, tarihli, kâğıttaki sözcükler.
+
+Bu bugün için yeterliydi.`,
+  },
+
+  {
+    id: 'fiziksel_open_01',
+    category: 'fiziksel',
+    emotionTags: ['korku', 'caresizlik'],
+    storyMoment: 'open_road',
+    title: 'Omuz Bırakıldı',
+    content: `Bir hafta sonra Can aynı koridordan geçti.
+
+Aynı koridor. Aynı locker'lar, aynı renk boyalı duvarlar. Can fark etti bunu — fark etmek için çaba harcamadı, kendiliğinden geldi.
+
+Omzunu içe çekip çekmediğini kontrol etti. Çekiyordu, biraz. Ama geçen haftakinden daha az.
+
+O üç kişi başka bir yerde duruyordu. Can onlara bakmadı. Bakmak istemediği için değil — nerede olduklarını bilmek eskisi kadar acil değildi artık.
+
+Koridoru geçti.
+
+Dışarıda güneş vardı ve teneffüste bahçeye çıktı. Duvara değil, ortasına gitti. Oturdu yere, defterini açtı ve bir şeyler karaladı — düz çizgiler, dörtgenler, ödev değil. Karalamak kafayı başka yere götürüyordu.
+
+Zil çalmadan önce birkaç dakika geçti böyle. Can defterini kapattı. Kalkacaktı ki fark etti — omuzları bırakılmıştı. İçe çekik değildi, sadece omuzlardı.
+
+Küçük bir şeydi. Ama Can fark etti.`,
+  },
+
+  /* ══════════════════════════════════════════════════════════════
+     SÖYLENTI — Eksik anlar: the_moment, body_next_day, imperfect_step, open_road
+     ══════════════════════════════════════════════════════════════ */
+
+  {
+    id: 'soylenti_moment_01',
+    category: 'soylenti',
+    emotionTags: ['utanc', 'korku'],
+    storyMoment: 'the_moment',
+    title: 'Duydum Dediler',
+    content: `Ayşe kantinde tepsiyle dönerken durdu.
+
+Kendi adını duymuştu — net, yüksek değil ama net. Arkasından geliyordu, bir masadan. Döndü mü? Dönmedi. Ama durdu.
+
+Yürüdü. Boş bir yere gitti, oturdu. Kulaklarda o isim kalıyordu — kendi adı, başkasının ağzında, ne bağlamda söylendiğini bilmiyordu. Bu en kötüsüydü: ne söylendiğini duymamak.
+
+Belli belirsiz bir cümle gelmişti — "Ayşe'nin o..." Sonrası gürültüde kaybolmuştu.
+
+"O" nun ne olduğunu bulmak için aklı çalışmaya başladı. Yakın zamanda ne olmuştu, kime ne söylemişti, neyi biri bozmuş olabilirdi?
+
+Liste uzadı. Bu listenin uzaması başlı başına bir şeydi.
+
+Tepsideki yemek soğudu. Ayşe fark etmedi. Gözleri masada değildi — o sesin geldiği yöne bakmadan o yöndeydi zihin.
+
+Söylenti ne kadar yayılmıştı? Gerçek miydi? Bu iki sorudan hangisi daha korkutucuydu, Ayşe henüz bilemiyordu.`,
+  },
+
+  {
+    id: 'soylenti_body_01',
+    category: 'soylenti',
+    emotionTags: ['utanc', 'caresizlik'],
+    storyMoment: 'body_next_day',
+    title: 'Bakışları Yorumlamak',
+    content: `Ertesi gün Ayşe okula girdiğinde gözleri iki şeyi taradı: kim bakıyor, kim bakmıyor.
+
+Bakanlar: belki biliyorlar. Bakmayanlar: bilmedikleri için mi, bilmek istemedikleri için mi? Her iki gruba da anlam yükledi — ve her iki anlam da aynı yere çıkıyordu.
+
+Derse girdi. Sırasına oturdu. Öğretmen konuştu. Ayşe dinlemeye çalıştı ama kulaklar yarı oradaydı.
+
+Sıra arkasından bir fısıltı geldi. Normalde umursamazdı. Bugün kulakları döndü — kendi adı geçiyor muydu? Geçmiyordu. Sıradan bir fısıltıydı.
+
+Ama artık her fısıltı önce kendi adının olup olmadığını tarıyordu. Otomatik, iradeyle değil.
+
+Öğle arasında tuvalete gitti. Aynaya baktı. Görünüşü normaldi. Hiçbir şey yazılı değildi yüzünde.
+
+Ellerini yıkadı. Suyun sesi birkaç saniye her şeyi bastırdı. Ayşe ellerini kurulayıp koridora çıktı.
+
+Hâlâ tarıyordu. Ama bir sonraki adımı attı.`,
+  },
+
+  {
+    id: 'soylenti_step_01',
+    category: 'soylenti',
+    emotionTags: ['utanc', 'caresizlik'],
+    storyMoment: 'imperfect_step',
+    title: 'Yazıp Silmek',
+    content: `Ayşe o akşam en güvendiği kişiyi düşündü. Bir isim geldi — annesinin değil, sınıftaki birinin de değil. Farklı sınıfların Türkçe öğretmeni — ama daha önce iki kez konuşmuşlardı ve her ikisinde de dinlediğini hissettirmişti.
+
+Telefona açtı. Okul portalından resmi e-posta adresini buldu.
+
+Yazdı: "Merhaba, bir şey danışmak istiyordum —" Sildi.
+
+"Hakkımda yanlış bir şey yayılıyor ve ne yapacağımı bilmiyorum." Baktı. Doğruydu. Ama çok doğruydu — bu kadar net bir şey göndermek...
+
+Sildi.
+
+"Merhaba, okuldaki bir şey hakkında konuşabilir miyiz? Uygun bir zamanınız olursa." Gönder.
+
+Nefesini tuttu. Pişmanlık geldi — anında, ilk saniyede. Ama gönderilmişti.
+
+Bir saat sonra cevap geldi: "Yarın teneffüste gel."
+
+Üç kelime. Ayşe ekranda baktı buna. Yarın teneffüse gitme fikri hem ürküttü hem rahatlamanın bir ucunu tutturdu.`,
+  },
+
+  {
+    id: 'soylenti_open_01',
+    category: 'soylenti',
+    emotionTags: ['utanc', 'uzuntu'],
+    storyMoment: 'open_road',
+    title: 'Kim Ne Dedi',
+    content: `Bir ay sonra Ayşe o söylentiyi düşündü — ne kadar yayıldığını, ne kadara ulaştığını, ne kadarının gerçek olduğunu hiçbir zaman tam öğrenmemişti.
+
+Garip olan şu: öğrenmek istemiyordu artık.
+
+Değil ki önemli değildi. Birkaç hafta önce çok önemliydi. Ama şu an öğrenmek için bir şey yapmayı düşünürken içinde bir şey "gerek yok" dedi. Kaçmak için değil, gerçekten gerek yok gibiydi.
+
+Öğretmenle konuşmuştu. "Bazı şeyler soruşturamayız ama gözetleyebiliriz" demişti. Tam bir çözüm değildi. Ama gerçekti — bir yetişkin biliyordu, ve bu tek başına bir şeydi.
+
+Koridorda yürüdü. Biri bir şey söyledi, kahkahalar attı. Almıyor muydu artık, yoksa farklı mı hissediyordu?
+
+Bilmiyordu kesin olarak. Ama adımları eskisi gibi ağırlaşmıyordu.
+
+Sınıfına girdi, yerine oturdu, defterini açtı.
+
+Söylenti bir yerlerde duruyordu. Ayşe buradaydı.`,
+  },
+
+  /* ══════════════════════════════════════════════════════════════
+     TEHDİT — Eksik anlar: the_moment, night_after, inner_conflict, open_road
+     ══════════════════════════════════════════════════════════════ */
+
+  {
+    id: 'tehdit_moment_01',
+    category: 'tehdit',
+    emotionTags: ['korku', 'caresizlik'],
+    storyMoment: 'the_moment',
+    title: 'Bekle Seni',
+    content: `Emre, teneffüste kantinden çıkarken koluna birinin değdiğini hissetti.
+
+Döndü. İki kişiydi. Aynı sınıftan değil ama aynı koridoru paylaşıyorlardı. Biri güldü, diğeri yüzüne bakmıyordu.
+
+"Hoca'ya söyledin, değil mi?" dedi ilki.
+
+Emre bir şey söylemedi. Ne "evet" ne "hayır" güvenli hissettirdi.
+
+"Bekle seni." Bu kadar. Döndüler, gittiler.
+
+Emre kantinin kapısında kaldı. İki saniye, beş saniye. Etraf devam ediyordu — öğrenciler geçiyor, zil iki dakikaya çalacaktı, biri gülerek geçti yanından.
+
+Midesi döndü. Değil ki bulantıdan — içten sıkışmak gibi farklı bir şey. Bacakları biraz ağırlaştı.
+
+"Bekle seni" — bu ne anlama geliyordu? Bugün mü, yarın mı, gerçekten mi, boş bir tehdit mi? Bu soruların cevabı yoktu ve cevabı olmamak, en kötü versiyonu hayal ettiriyordu.
+
+Zil çaldı. Emre içeri girdi.`,
+  },
+
+  {
+    id: 'tehdit_night_01',
+    category: 'tehdit',
+    emotionTags: ['korku', 'caresizlik'],
+    storyMoment: 'night_after',
+    title: 'Tekrar',
+    content: `Emre o gece uyuyamadı.
+
+Saat onu geçmişti, sonra on biri. Tavanı izliyordu — beyaz tavan, lambanın şekli, bir köşedeki sararmış boya.
+
+"Bekle seni" dönüp duruyordu. Sadece iki kelimeydi ama iki kelime kafada büyüyordu — yarın ne yapacaklar, nerede, nasıl, kim daha gelecek?
+
+Senaryolar geldi. Her senaryoda farklı şeyler oluyordu. Ama bu "olacaklar" hayal içinde bile düzgün sonuçlanmıyordu; hayal içinde bile cevap bulmak zordu.
+
+Telefona baktı. Saat 00:14. Kimi arasaydı bu saatte? Annesini uyandırsa ne diyecekti? "Biri bana tehdit savurdu" — bunu söylemek mümkün mü, bunu söylemek neyi başlatır, daha da kötü olur mu?
+
+Bu sorular birbirini takip etti.
+
+Pencereden ay görünüyordu. Emre bir süre aya baktı. Ay cevap vermiyordu, tabii. Ama bakmak için bir yer olması iyiydi.
+
+Sabah geldi — bir noktada uyumuştu, bilmiyordu ne zaman.`,
+  },
+
+  {
+    id: 'tehdit_conflict_01',
+    category: 'tehdit',
+    emotionTags: ['korku', 'caresizlik'],
+    storyMoment: 'inner_conflict',
+    title: 'Söylemek mi',
+    content: `Emre'nin aklında bir hesap dönüyordu: söylemek mi, söylememek mi?
+
+Söylerse — kim? Öğretmen mi, rehber mi, anne mi? Her biri farklı sorular getirir. Öğretmen okul meselesi yapar, belki daha çok dikkat çeker. Anne merak eder, korkar, kendini suçlar. Rehber — hiç bilmiyordu, oraya gitmemişti.
+
+Söyleme neyi değiştirdi? Muhtemelen bir şeyi. Ama ne yönde değiştireceği belirsizdi. Belirsizlik en kötüsüydü.
+
+Söylemezse — bugün iyi geçebilir, tehdit boş çıkabilir. Ya da geçemez.
+
+Bu iki seçenek arasında kaldı. Söylemenin riski somuttu, söylememenin riski soyuttu — ama soyut tehlike bazen daha ağır basıyordu çünkü hayal gücü her zaman gerçekten kötüymüş gibi dolduruyordu.
+
+Not defterine yazdı sonunda: "Söylersem ne olur?"
+
+Altına: "Söylemezsem ne olur?"
+
+İkinci cevap daha uzun çıktı. Bu bir şey mi anlatıyordu?
+
+Defteri kapattı. Cevap net değildi hâlâ. Ama yazılmış olması, kafanın içindeki döngüden biraz daha net görünmesini sağladı.`,
+  },
+
+  {
+    id: 'tehdit_open_01',
+    category: 'tehdit',
+    emotionTags: ['korku', 'uzuntu'],
+    storyMoment: 'open_road',
+    title: 'Aynı Koridor',
+    content: `İki hafta sonra Emre aynı koridordan geçti.
+
+Duraksadı mı? Duraksadı — ama geçen sefer duraksaması daha uzundu. Bu sefer iki adım önceden fark etti, bir nefes aldı, geçti.
+
+O iki kişi oradaydı. Biri telefona bakıyordu, diğeri bir şeyler anlatıyordu arkadaşına. Emre'ye bakmadılar.
+
+Bu iyi miydi yoksa görmezden mi geliyorlardı? Emre bilmiyordu. Ama "bekle seni" — bir hafta önceki kadar büyük değildi kafada artık.
+
+Rehber öğretmenle konuşmuştu. Tam olarak ne olacağını bilmiyordu — öğretmen "takip edeceğiz" demişti, somut bir eylem planı değildi ama biri biliyordu. Bir yetişkin bilmesiydi bu.
+
+Bilmeden önce Emre yalnızdı bu kafayla. Şimdi en azından o kafayı paylaşmıştı.
+
+Koridor bitmişti. Sınıfa girdi.
+
+Tehdit tamamen geçmişti mi? Bilmiyordu. Ama dün koridoru düşünerek uyumadı. Bu birinciden farklıydı.`,
+  },
+
+  /* ══════════════════════════════════════════════════════════════
+     EVRENSEL — Ek anlar: world_before, imperfect_step, ikinci connection
+     ══════════════════════════════════════════════════════════════ */
+
+  {
+    id: 'universal_before_01',
+    category: 'diger',
+    emotionTags: ['uzuntu', 'yalnizlik'],
+    storyMoment: 'world_before',
+    title: 'Önceki Sabah',
+    content: `Bir sabah vardı — tam olarak hangi sabah olduğu değişmişti ama o sabah vardı.
+
+O sabah okul çantasını hazırlarken müzik dinliyordu. Hangi şarkıydı hatırlamıyor artık, ama dinliyordu. Ve çantayı hazırlarken bir şeyler mırıldanıyordu.
+
+O sabah öğretmenin "güzel" dediği bir cümle yazmıştı. Sadece bir cümleydi ama o gün iyiydi.
+
+O sabah öğle arasında yanına oturan biri vardı — kimdi, ne konuştular, bunlar belirgin değil. Ama biri oturmuştu.
+
+Bu ayrıntılar küçük hissettiriyor şimdi. Ama şimdi o ayrıntılara bakınca bir şey görünüyor: o sabah her şey hâlâ yerindeydi. Müzik çalıyordu, cümle güzeldi, biri yanındaydı.
+
+Bir şeyler bittikten sonra, bitmeden önceki o sıradan sabah değer kazanıyor. Sıradan olduğu için değil — orada olduğu için.
+
+O sabah hâlâ olmuştu. Kimse onu geri alamazdı.`,
+  },
+
+  {
+    id: 'universal_step_01',
+    category: 'diger',
+    emotionTags: ['caresizlik', 'uzuntu'],
+    storyMoment: 'imperfect_step',
+    title: 'İlk Cümle',
+    content: `Yazmak üç denemede oldu.
+
+İlk seferinde: "Okulda bazı sorunlar yaşıyorum." Sildi — çok belirsiz.
+
+İkinci seferinde: "Birisi beni rahatsız ediyor ve durmuyor." Baktı buna. Doğruydu ama "birisi" ve "rahatsız" kelimeleri yeterince taşımıyordu gerçeği. Sildi.
+
+Üçüncüde sadece şunu yazdı: "Bu hafta çok yoruldum."
+
+Bu da tam değildi. Ama bu sefer göndermek daha kolaydı — çünkü doğruydu ve tamamını söylemek zorunda değildi şimdi.
+
+Gönderdi.
+
+Cevap birkaç dakika sonra geldi. "Anlat." İki kelime, soru işareti bile yok. Ama "anlat" kapı açık bırakıyordu.
+
+Bir şey yazmaya başladı — düzensiz, bazen geri dönerek, bazen atlayarak. Tamamını anlatmadı. Ama yazarken bir şey oldu: kelimeler çıktıkça içeride yer açılıyordu. Az, ama vardı.
+
+Mesajı gönderdi. Cevap bekledi. Beklemek zordu. Ama mesaj gitmişti ve bu tek başına bir şeydi.`,
+  },
+
   {
     id: 'universal_connection_01',
     category: 'diger',

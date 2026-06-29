@@ -40,7 +40,7 @@ const HomePage = () => {
             <header className="flex flex-wrap items-end justify-between gap-4 animate-rise-in">
                 <div>
                     <p className="mb-1 text-sm font-bold text-neutral-400">{greeting()},</p>
-                    <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">{profile.pseudonym || 'Gezgin'} 👋</h1>
+                    <h1 className="text-[1.85rem] font-extrabold tracking-tight sm:text-4xl">{profile.pseudonym || 'Gezgin'} 👋</h1>
                 </div>
                 {profile.dailyStreak > 1 && (
                     <Badge tone="accent" className="!px-3.5 !py-2 !text-[13px]">
@@ -51,41 +51,47 @@ const HomePage = () => {
             </header>
 
             {/* ---------- Yolculuk kartı ---------- */}
-            <Card className="overflow-hidden animate-rise-in" style={{ animationDelay: '0.06s' }}>
-                <div className="flex flex-col items-center gap-6 p-7 sm:flex-row sm:p-9">
-                    <button
-                        onClick={() => navigate('yolculuk')}
-                        className="shrink-0 transition-transform duration-300 hover:scale-105"
-                        aria-label="Yolculuğuma git"
-                    >
-                        <CocoonVisual stage={stage.n} size={150} />
-                    </button>
+            <button
+                onClick={() => navigate('yolculuk')}
+                className="card group relative w-full overflow-hidden p-0 text-left animate-rise-in"
+                style={{ animationDelay: '0.06s' }}
+                aria-label="Yolculuk sayfasına git"
+            >
+                {/* Stage-colored radial glow */}
+                <div className="absolute inset-0 opacity-[0.08] transition-opacity duration-500 group-hover:opacity-[0.13]" style={{ background: `radial-gradient(ellipse at 80% 50%, ${stage.color} 0%, transparent 70%)` }} aria-hidden />
+                <div className="relative flex flex-col items-center gap-5 px-7 py-7 sm:flex-row sm:gap-8 sm:px-9 sm:py-8">
+                    {/* Visual with drop-shadow glow */}
+                    <div className="shrink-0 transition-transform duration-500 group-hover:scale-105" style={{ filter: `drop-shadow(0 0 28px ${stage.color}55)` }}>
+                        <CocoonVisual stage={stage.n} size={180} />
+                    </div>
+                    {/* Info */}
                     <div className="w-full flex-1 text-center sm:text-left">
-                        <p className="mb-1 text-[12px] font-extrabold uppercase tracking-wider text-neutral-400">
-                            Aşama {stage.n}/7
+                        <p className="mb-1 text-[11px] font-extrabold uppercase tracking-widest text-neutral-400">
+                            Aşama {stage.n}/7 · Metamorfoz Yolculuğun
                         </p>
-                        <h2 className="mb-1.5 text-2xl font-extrabold" style={{ color: stage.color }}>{stage.name}</h2>
+                        <h2 className="mb-2 text-[1.75rem] font-extrabold leading-tight tracking-tight" style={{ color: stage.color }}>{stage.name}</h2>
                         <p className="mb-5 text-sm leading-relaxed text-neutral-500">{stage.blurb}</p>
                         <ProgressBar value={stageProgress(profile.totalOz)} height={10} />
-                        <div className="mt-2.5 flex items-center justify-between text-[12px] font-bold">
-                            <span className="flex items-center gap-1 text-accent-600">
-                                <Sparkles size={13} />
+                        <div className="mt-3 flex items-center justify-between text-[12px] font-bold">
+                            <span className="flex items-center gap-1.5 rounded-full border border-accent-200 bg-accent-50 px-2.5 py-1 text-accent-700">
+                                <Sparkles size={12} />
                                 {profile.totalOz.toLocaleString('tr-TR')} ÖZ
                             </span>
                             {next ? (
-                                <span className="text-neutral-400">{next.name} için {ozToNext(profile.totalOz)} ÖZ kaldı</span>
+                                <span className="text-neutral-400">{ozToNext(profile.totalOz)} ÖZ → {next.name}</span>
                             ) : (
-                                <span className="text-accent-600">Dönüşüm tamamlandı 🦋</span>
+                                <span className="font-extrabold text-accent-600">Dönüşüm tamamlandı 🦋</span>
                             )}
                         </div>
                     </div>
+                    <ArrowRight size={18} className="hidden shrink-0 text-neutral-300 transition-all duration-300 group-hover:translate-x-1 group-hover:text-primary-400 sm:block" />
                 </div>
-            </Card>
+            </button>
 
             {/* ---------- Hızlı oluştur ---------- */}
             <section className="animate-rise-in" style={{ animationDelay: '0.12s' }}>
                 <div className="mb-3 flex items-center justify-between">
-                    <h2 className="text-lg font-extrabold">Bugün neyi dönüştürelim?</h2>
+                    <h2 className="text-xl font-extrabold">Bugün neyi dönüştürelim?</h2>
                 </div>
                 <div className="grid gap-3 sm:grid-cols-3">
                     {Object.entries(CONTENT_TYPES).map(([key, t]) => {
@@ -94,14 +100,14 @@ const HomePage = () => {
                             <button
                                 key={key}
                                 onClick={() => navigate(`olustur/${key}`)}
-                                className="card card-hover group flex items-center gap-4 p-5 text-left active:scale-[0.99]"
+                                className="card card-hover group flex items-center gap-4 p-5 text-left active:scale-[0.98]"
                             >
-                                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary-50 text-primary-600 transition-transform duration-300 group-hover:scale-110">
+                                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-b from-primary-400 to-primary-600 text-white shadow-[0_2px_8px_-2px_rgba(106,82,220,0.45)] transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_4px_12px_-2px_rgba(106,82,220,0.55)]">
                                     <Icon size={21} strokeWidth={2.2} />
                                 </span>
                                 <span className="flex-1">
                                     <span className="block font-extrabold text-neutral-900">{t.label}</span>
-                                    <span className="block text-[12px] font-bold text-accent-600">+{t.oz} ÖZ</span>
+                                    <span className="block text-[12px] font-extrabold text-accent-600">+{t.oz} ÖZ</span>
                                 </span>
                                 <ArrowRight size={17} className="text-neutral-300 transition-all duration-300 group-hover:translate-x-1 group-hover:text-primary-500" />
                             </button>
@@ -111,7 +117,7 @@ const HomePage = () => {
             </section>
 
             {/* ---------- Günün pratiği ---------- */}
-            <Card className="grain relative overflow-hidden border-none bg-gradient-to-br from-accent-50 to-primary-50 p-6 sm:p-7 animate-rise-in" style={{ animationDelay: '0.18s' }}>
+            <Card className="grain relative overflow-hidden border border-accent-200/60 bg-gradient-to-br from-accent-50 via-amber-50/40 to-primary-50 p-6 shadow-[0_0_0_4px_rgba(226,154,40,0.06)] sm:p-7 animate-rise-in" style={{ animationDelay: '0.18s' }}>
                 <div className="relative flex items-start gap-4">
                     <span className="text-3xl" aria-hidden>{practice.icon}</span>
                     <div>

@@ -41,7 +41,9 @@ const AuthModal = ({ open, onClose }) => {
     return (
         <Modal open={open} onClose={onClose} size="sm" labelledBy="auth-title">
             <div className="px-7 pb-8 pt-10 text-center">
-                <ButterflyMark size={44} className="mx-auto mb-4" />
+                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-b from-primary-50 to-primary-100 shadow-[0_4px_16px_-4px_rgba(106,82,220,0.25)]">
+                    <ButterflyMark size={40} className="text-primary-600" />
+                </div>
                 <h2 id="auth-title" className="mb-1.5 text-2xl font-extrabold">Güvenli alana hoş geldin</h2>
                 <p className="mb-7 text-sm text-neutral-500">Kim olduğunu söylemene gerek yok. Burada hikâyen konuşur, kimliğin değil.</p>
 
