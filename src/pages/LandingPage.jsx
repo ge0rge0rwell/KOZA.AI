@@ -78,13 +78,13 @@ const HeroVisual = () => {
         return () => clearInterval(t);
     }, []);
     return (
-        <div className="relative mx-auto flex items-center justify-center" style={{ width: 420, height: 420 }}>
+        <div className="relative mx-auto flex items-center justify-center aspect-square w-full max-w-[420px]">
             {/* Glow backdrop */}
             <div className="absolute inset-0 rounded-full" style={{ background: 'radial-gradient(circle at 50% 50%, rgba(132,112,232,0.22) 0%, rgba(226,154,40,0.10) 50%, transparent 72%)', filter: 'blur(24px)' }} aria-hidden />
             {/* Concentric rings */}
             <div className="absolute inset-6 rounded-full border border-primary-200/30" style={{ borderColor: 'rgba(132,112,232,0.18)' }} aria-hidden />
             <div className="absolute inset-14 rounded-full border" style={{ borderColor: 'rgba(132,112,232,0.12)' }} aria-hidden />
-            <CocoonVisual stage={stage} size={400} className="relative transition-all duration-700" />
+            <CocoonVisual stage={stage} size={400} className="relative w-full h-full transition-all duration-700" />
             <div className="absolute -bottom-2 left-1/2 flex -translate-x-1/2 gap-2">
                 {Array.from({ length: 7 }).map((_, i) => (
                     <span
