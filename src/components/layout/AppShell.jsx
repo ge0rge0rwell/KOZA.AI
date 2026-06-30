@@ -115,7 +115,7 @@ const AppShell = ({ children }) => {
             </aside>
 
             {/* ---------- Mobil üst bar ---------- */}
-            <header className="fixed inset-x-0 top-0 z-40 flex h-[60px] items-center justify-between border-b border-neutral-200/70 px-4 surface-tint lg:hidden">
+            <header className="safe-area-header fixed inset-x-0 top-0 z-40 flex items-center justify-between border-b border-neutral-200/70 px-4 surface-tint lg:hidden">
                 <button onClick={() => navigate('')} aria-label="Ana sayfa">
                     <Logo size="sm" />
                 </button>
@@ -124,18 +124,19 @@ const AppShell = ({ children }) => {
                     <button
                         onClick={() => openModal('safety')}
                         aria-label="Destek hattı"
-                        className="flex h-9 w-9 items-center justify-center rounded-full bg-danger-50 text-danger-500 transition-transform active:scale-90"
+                        className="touch-target rounded-full bg-danger-50 text-danger-500 transition-transform active:scale-90"
                     >
                         <HeartHandshake size={17} strokeWidth={2.2} />
                     </button>
-                    <button onClick={() => navigate('profil')} aria-label="Profilim" className="transition-transform active:scale-90">
+                    <button onClick={() => navigate('profil')} aria-label="Profilim" className="touch-target transition-transform active:scale-90">
                         <Avatar emoji={profile.emoji} color={profile.color} size={36} ring />
                     </button>
                 </div>
             </header>
 
             {/* ---------- İçerik ---------- */}
-            <main className="px-4 pb-32 pt-[76px] sm:px-6 lg:ml-[264px] lg:px-10 lg:pb-16 lg:pt-10">
+            <main className="px-4 pb-32 sm:px-6 lg:ml-[264px] lg:px-10 lg:pb-16 lg:pt-10"
+                  style={{ paddingTop: 'calc(76px + env(safe-area-inset-top))' }}>
                 <div className="mx-auto w-full max-w-5xl">{children}</div>
             </main>
 
@@ -178,7 +179,7 @@ const TabButton = ({ icon: Icon, label, active, onClick }) => (
         onClick={onClick}
         aria-current={active ? 'page' : undefined}
         className={cn(
-            'relative flex flex-col items-center gap-1 py-1.5 transition-all duration-200',
+            'touch-target relative flex flex-col items-center gap-0.5 transition-all duration-200',
             active ? 'text-primary-600' : 'text-neutral-400 active:text-neutral-600'
         )}
     >
