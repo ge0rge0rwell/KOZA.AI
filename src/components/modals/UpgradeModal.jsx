@@ -103,7 +103,6 @@ const UpgradeModal = () => {
                                 value={schoolEmail}
                                 onChange={(e) => setSchoolEmail(e.target.value)}
                                 error={emailError}
-                                autoFocus
                             />
                             <Button size="lg" type="submit" className="w-full" icon={School} loading={processing}>
                                 Erişim Kodumu Oluştur

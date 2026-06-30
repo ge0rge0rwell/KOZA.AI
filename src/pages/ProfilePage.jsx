@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dices, BarChart3, LogOut, Download, ShieldCheck, KeyRound, Check, Cloud, CloudOff } from 'lucide-react';
+import { Dices, BarChart3, LogOut, Download, ShieldCheck, KeyRound, Check, Cloud, CloudOff, HelpCircle, ChevronDown, School, UserCheck, ClipboardCopy } from 'lucide-react';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
@@ -28,6 +28,7 @@ const ProfilePage = () => {
     const { addToast, navigate } = useUI();
     const [code, setCode] = useState('');
     const [codeError, setCodeError] = useState(null);
+    const [showTutorial, setShowTutorial] = useState(false);
     const [nameDraft, setNameDraft] = useState(profile.pseudonym || '');
     const [nameError, setNameError] = useState(null);
 
@@ -183,11 +184,85 @@ const ProfilePage = () => {
                                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-info-50 text-info-600">
                                     <KeyRound size={20} />
                                 </span>
-                                <p className="text-[13px] font-bold leading-relaxed text-neutral-500">
-                                    KOZA Okul planına sahip kurumların rehber öğretmenleri, erişim koduyla
-                                    anonim analiz paneline ulaşabilir.
-                                </p>
+                                <div>
+                                    <p className="text-[13px] font-bold leading-relaxed text-neutral-500">
+                                        KOZA Okul planına sahip kurumların rehber öğretmenleri, erişim koduyla
+                                        anonim analiz paneline ulaşabilir.
+                                    </p>
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowTutorial((v) => !v)}
+                                        className="mt-1.5 flex items-center gap-1 text-[12px] font-bold text-primary-500 hover:text-primary-700 transition-colors"
+                                    >
+                                        <HelpCircle size={12} />
+                                        Erişim kodunu nasıl alırım?
+                                        <ChevronDown size={12} className={`transition-transform duration-300 ${showTutorial ? 'rotate-180' : ''}`} />
+                                    </button>
+                                </div>
                             </div>
+
+                            {/* ---------- Interactive Tutorial ---------- */}
+                            {showTutorial && (
+                                <div className="mb-5 rounded-2xl border border-primary-100 bg-gradient-to-b from-primary-50/60 to-white p-5 animate-rise-in">
+                                    <p className="mb-4 text-[12px] font-extrabold uppercase tracking-widest text-primary-400">3 Adımda Erişim Kodu</p>
+                                    <ol className="space-y-4">
+                                        {/* Step 1 */}
+                                        <li className="flex items-start gap-3.5">
+                                            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary-500 text-[13px] font-extrabold text-white shadow-sm">1</span>
+                                            <div className="flex-1">
+                                                <p className="text-[13px] font-extrabold text-neutral-800">Okul yöneticinize veya BT sorumlusuna başvurun</p>
+                                                <p className="mt-0.5 text-[12px] leading-relaxed text-neutral-500">
+                                                    Okul idaresi veya BT sorumlusu, KOZA'yı okulunuz için etkinleştirme yetkisine sahiptir.
+                                                </p>
+                                            </div>
+                                        </li>
+
+                                        {/* Connector */}
+                                        <div className="ml-4 h-4 w-px bg-primary-200" />
+
+                                        {/* Step 2 */}
+                                        <li className="flex items-start gap-3.5">
+                                            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary-500 text-[13px] font-extrabold text-white shadow-sm">2</span>
+                                            <div className="flex-1">
+                                                <p className="text-[13px] font-extrabold text-neutral-800">Yönetici KOZA'yı açıp okul ikonuna tıklar</p>
+                                                <div className="mt-2 flex items-center gap-2 rounded-xl border border-neutral-200 bg-white px-3 py-2.5 shadow-sm">
+                                                    <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-accent-500 text-white shrink-0">
+                                                        <School size={16} />
+                                                    </span>
+                                                    <div>
+                                                        <p className="text-[12px] font-extrabold text-neutral-800">KOZA Okul</p>
+                                                        <p className="text-[11px] text-neutral-400">Ekranın üst kısmındaki okul ikonuna tıklanır</p>
+                                                    </div>
+                                                </div>
+                                                <p className="mt-1.5 text-[12px] leading-relaxed text-neutral-500">
+                                                    Yönetici, resmî okul e-postasını (<span className="font-bold">.k12.tr</span> uzantılı) girerek erişim kodunu oluşturur.
+                                                </p>
+                                            </div>
+                                        </li>
+
+                                        {/* Connector */}
+                                        <div className="ml-4 h-4 w-px bg-primary-200" />
+
+                                        {/* Step 3 */}
+                                        <li className="flex items-start gap-3.5">
+                                            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-success-500 text-[13px] font-extrabold text-white shadow-sm">
+                                                <Check size={14} strokeWidth={3} />
+                                            </span>
+                                            <div className="flex-1">
+                                                <p className="text-[13px] font-extrabold text-neutral-800">Kodu alın ve aşağıya girin</p>
+                                                <div className="mt-2 flex items-center gap-2 rounded-xl border-2 border-dashed border-primary-200 bg-primary-50 px-4 py-2.5">
+                                                    <ClipboardCopy size={14} className="shrink-0 text-primary-400" />
+                                                    <p className="font-mono text-[13px] font-extrabold tracking-widest text-primary-600">KOZA-OKUL-XXXX</p>
+                                                </div>
+                                                <p className="mt-1.5 text-[12px] leading-relaxed text-neutral-500">
+                                                    Yöneticiden bu formatı aldıktan sonra kodu aşağıdaki alana yapıştırıp <span className="font-bold">Doğrula</span>'ya tıklayın.
+                                                </p>
+                                            </div>
+                                        </li>
+                                    </ol>
+                                </div>
+                            )}
+
                             <div className="flex gap-2.5">
                                 <Input
                                     placeholder="Erişim kodu (ör. KOZA-OKUL-…)"
