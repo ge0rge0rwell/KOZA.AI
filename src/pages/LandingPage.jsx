@@ -169,6 +169,144 @@ const FaqItem = ({ q, a, open, onToggle }) => (
     </div>
 );
 
+/* ---------- Placeholder QR Code ---------- */
+const PlaceholderQR = ({ size = 180 }) => (
+    <svg
+        width={size}
+        height={size}
+        viewBox="0 0 180 180"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-label="APK indirme QR kodu (yakında)"
+        role="img"
+    >
+        <rect x="1" y="1" width="178" height="178" rx="12" fill="white" stroke="#E8E5DF" strokeWidth="2"/>
+        {/* Top-left finder */}
+        <rect x="14" y="14" width="48" height="48" rx="4" fill="#6A52DC"/>
+        <rect x="22" y="22" width="32" height="32" rx="2" fill="white"/>
+        <rect x="28" y="28" width="20" height="20" rx="1" fill="#6A52DC"/>
+        {/* Top-right finder */}
+        <rect x="118" y="14" width="48" height="48" rx="4" fill="#6A52DC"/>
+        <rect x="126" y="22" width="32" height="32" rx="2" fill="white"/>
+        <rect x="132" y="28" width="20" height="20" rx="1" fill="#6A52DC"/>
+        {/* Bottom-left finder */}
+        <rect x="14" y="118" width="48" height="48" rx="4" fill="#6A52DC"/>
+        <rect x="22" y="126" width="32" height="32" rx="2" fill="white"/>
+        <rect x="28" y="132" width="20" height="20" rx="1" fill="#6A52DC"/>
+        {/* Data modules */}
+        <rect x="76" y="14" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="88" y="14" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="100" y="14" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="76" y="26" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="100" y="26" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="88" y="38" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="76" y="50" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="88" y="50" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="100" y="50" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="14" y="76" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="26" y="76" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="50" y="76" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="14" y="88" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="38" y="88" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="50" y="88" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="26" y="100" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="38" y="100" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="76" y="76" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="88" y="76" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="100" y="76" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="112" y="76" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="76" y="88" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="100" y="88" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="112" y="88" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="88" y="100" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="112" y="100" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="118" y="76" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="130" y="76" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="154" y="76" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="118" y="88" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="142" y="88" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="154" y="88" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="130" y="100" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="142" y="100" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="76" y="118" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="100" y="118" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="112" y="118" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="88" y="130" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="100" y="130" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="76" y="142" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="112" y="142" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="88" y="154" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="100" y="154" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="118" y="118" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="130" y="118" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="154" y="118" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="118" y="130" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="142" y="130" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="154" y="130" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="130" y="142" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="142" y="142" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="118" y="154" width="8" height="8" rx="1" fill="#6A52DC"/>
+        <rect x="154" y="154" width="8" height="8" rx="1" fill="#6A52DC"/>
+        {/* Butterfly center mark */}
+        <text x="90" y="96" textAnchor="middle" dominantBaseline="middle" fontSize="20">🦋</text>
+    </svg>
+);
+
+/* ---------- Download Section ---------- */
+const DownloadSection = () => (
+    <section id="indir" className="px-5 py-20 bg-white/50">
+        <div className="mx-auto max-w-6xl">
+            <div className="card overflow-hidden md:grid md:grid-cols-2">
+                <div className="p-10 sm:p-12 flex flex-col justify-center gap-6">
+                    <div>
+                        <p className="mb-2 text-[11px] font-extrabold uppercase tracking-[0.25em] text-primary-500">Mobil Uygulama</p>
+                        <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl mb-3">
+                            KOZA'yı cebine al
+                        </h2>
+                        <p className="text-sm leading-relaxed text-neutral-500">
+                            Uygulamayı doğrudan Android cihazına indirebilirsin. QR kodu tara veya butona dokun — tek adımda yükle.
+                        </p>
+                    </div>
+                    <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                        <a
+                            href="#indir"
+                            onClick={(e) => e.preventDefault()}
+                            className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-b from-neutral-800 to-neutral-900 px-5 py-3 text-sm font-extrabold text-white shadow-card transition-all hover:scale-105 hover:shadow-lift active:scale-95"
+                            aria-label="Android APK indir"
+                        >
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M17.523 0.976 L 2.477 8.924 A 1 1 0 0 0 2 9.8 V 14.2 A 1 1 0 0 0 2.477 15.076 L 17.523 23.024 A 1 1 0 0 0 19 22.15 V 1.85 A 1 1 0 0 0 17.523 0.976Z" style={{display:'none'}}/>
+                                <path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C6.97 3.26 6 5.01 6 7h12c0-1.99-.97-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"/>
+                            </svg>
+                            Android APK İndir
+                        </a>
+                        <span className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-5 py-3 text-sm font-bold text-neutral-400">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                            </svg>
+                            iOS — Yakında
+                        </span>
+                    </div>
+                    <p className="text-[11px] font-bold text-neutral-400">
+                        * Beta APK. Google Play ve App Store yakında.
+                    </p>
+                </div>
+                <div className="flex flex-col items-center justify-center gap-4 border-t border-neutral-100 bg-gradient-to-br from-primary-50/60 to-neutral-50 p-10 sm:p-12 md:border-l md:border-t-0">
+                    <div className="rounded-2xl border-2 border-primary-100 bg-white p-4 shadow-card">
+                        <PlaceholderQR size={164} />
+                    </div>
+                    <p className="text-center text-[12px] font-bold text-neutral-400">
+                        QR kodu tara → APK indir
+                    </p>
+                    <span className="rounded-full border border-accent-200 bg-accent-50 px-3 py-1 text-[11px] font-extrabold text-accent-700">
+                        🔄 Gerçek QR yakında güncelleniyor
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+);
+
 const LandingPage = () => {
     const [showAuth, setShowAuth] = useState(false);
     const [openFaq, setOpenFaq] = useState(0);
@@ -609,6 +747,10 @@ const LandingPage = () => {
                         </div>
                     </div>
                 </section>
+
+                {/* ---------- Uygulama İndir ---------- */}
+                <DownloadSection />
+
             </main>
 
             {/* ---------- Alt bilgi ---------- */}
