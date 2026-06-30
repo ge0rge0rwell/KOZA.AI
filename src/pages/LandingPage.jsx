@@ -468,6 +468,7 @@ const LandingPage = () => {
                                     </div>
                                 ))}
                             </div>
+                            </div>
                         </div>
                     </div>
                 </section>
