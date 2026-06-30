@@ -89,8 +89,8 @@ export default defineConfig({
             output: {
                 // Named chunk splitting — explicit control over what loads when
                 manualChunks(id) {
-                    // Firebase: large but needed for auth — keep in parallel chunk
-                    if (id.includes('node_modules/firebase'))       return 'firebase';
+                    // Firebase: dynamically imported from firebase.js → auto-split by Rollup.
+                    // Do NOT force into a named chunk here — that would make it static again.
                     // React core — tiny, shares cache across Vercel deployments
                     if (id.includes('node_modules/react'))          return 'react';
                     // Lucide icons — large icon set, separate for cache longevity

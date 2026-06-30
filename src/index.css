@@ -107,8 +107,11 @@
         text-wrap: pretty;
     }
 
-    button {
+    button, a, [role="button"] {
         cursor: pointer;
+        /* Eliminates iOS 300ms tap delay — taps fire instantly, preventing
+           clicks from being lost when a React re-render happens mid-tap. */
+        touch-action: manipulation;
     }
 
     button:disabled {

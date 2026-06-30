@@ -5,9 +5,11 @@ import { useUI } from './context/UIContext';
 import AppShell from './components/layout/AppShell';
 import ToastStack from './components/ui/ToastStack';
 import Spinner from './components/ui/Spinner';
-import SafetyModal from './components/modals/SafetyModal';
-import UpgradeModal from './components/modals/UpgradeModal';
-import StageCelebration from './components/modals/StageCelebration';
+// Modals are lazy — they're rare events, no reason to pull confetti + modal
+// code into the initial bundle (saves ~14 kB gzip on the critical path).
+const SafetyModal      = lazy(() => import('./components/modals/SafetyModal'));
+const UpgradeModal     = lazy(() => import('./components/modals/UpgradeModal'));
+const StageCelebration = lazy(() => import('./components/modals/StageCelebration'));
 
 const LandingPage = lazy(() => import('./pages/LandingPage'));
 const OnboardingPage = lazy(() => import('./pages/OnboardingPage'));
@@ -64,7 +66,7 @@ const App = () => {
             <Suspense fallback={<FullScreenLoader />}>
                 <ContentView />
                 <ToastStack />
-                <StageCelebration />
+                <Suspense fallback={null}><StageCelebration /></Suspense>
             </Suspense>
         );
     }
@@ -73,7 +75,7 @@ const App = () => {
             <Suspense fallback={<FullScreenLoader />}>
                 <CommunityItemView />
                 <ToastStack />
-                <StageCelebration />
+                <Suspense fallback={null}><StageCelebration /></Suspense>
             </Suspense>
         );
     }
@@ -104,9 +106,9 @@ const App = () => {
                 </Suspense>
             </AppShell>
             <ToastStack />
-            <SafetyModal />
-            <UpgradeModal />
-            <StageCelebration />
+            <Suspense fallback={null}><SafetyModal /></Suspense>
+            <Suspense fallback={null}><UpgradeModal /></Suspense>
+            <Suspense fallback={null}><StageCelebration /></Suspense>
         </>
     );
 };
