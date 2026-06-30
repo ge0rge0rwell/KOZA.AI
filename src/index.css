@@ -138,10 +138,12 @@
 @utility card-hover {
     transition: transform 0.3s var(--ease-out-soft), box-shadow 0.3s var(--ease-out-soft), border-color 0.3s var(--ease-out-soft);
 
-    &:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-lift), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-        border-color: var(--color-primary-200);
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lift), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            border-color: var(--color-primary-200);
+        }
     }
 }
 
@@ -211,6 +213,19 @@
     &::-webkit-scrollbar-thumb:hover {
         background: var(--color-neutral-400);
     }
+}
+
+@utility touch-target {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@utility safe-area-header {
+    padding-top: env(safe-area-inset-top);
+    height: calc(60px + env(safe-area-inset-top));
 }
 
 @utility grain {
