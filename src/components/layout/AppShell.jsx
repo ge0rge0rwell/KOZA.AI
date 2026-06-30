@@ -179,18 +179,29 @@ const TabButton = ({ icon: Icon, label, active, onClick }) => (
         onClick={onClick}
         aria-current={active ? 'page' : undefined}
         className={cn(
-            'touch-target relative flex flex-col items-center gap-0.5 transition-all duration-200',
+            'touch-target relative flex flex-col items-center gap-0.5 transition-colors duration-200',
             active ? 'text-primary-600' : 'text-neutral-400 active:text-neutral-600'
         )}
     >
         <span className={cn(
-            'flex h-8 w-10 items-center justify-center rounded-xl transition-all duration-200',
-            active ? 'scale-110 bg-primary-50' : 'hover:bg-neutral-100'
+            'flex h-8 w-10 items-center justify-center rounded-xl transition-all duration-300',
+            active
+                ? 'bg-primary-50 shadow-[0_0_0_4px_rgba(132,112,232,0.10)] animate-tab-pop'
+                : 'hover:bg-neutral-100'
         )}>
             <Icon size={20} strokeWidth={active ? 2.4 : 2} />
         </span>
-        <span className={cn('text-[10px] transition-all duration-200', active ? 'font-extrabold text-primary-600' : 'font-bold')}>{label}</span>
-        {active && <span className="absolute bottom-0 h-[3px] w-6 rounded-full bg-primary-500" aria-hidden />}
+        <span className={cn(
+            'text-[10px] transition-all duration-200',
+            active ? 'font-extrabold text-primary-600 scale-105' : 'font-bold'
+        )}>
+            {label}
+        </span>
+        {/* Sliding bottom indicator */}
+        <span className={cn(
+            'absolute bottom-0 rounded-full bg-primary-500 transition-all duration-300',
+            active ? 'w-6 h-[3px] opacity-100' : 'w-0 h-[3px] opacity-0'
+        )} aria-hidden />
     </button>
 );
 
