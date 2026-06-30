@@ -36,8 +36,10 @@ const StageCelebration = () => {
             <div
                 className="grain relative w-full max-w-md overflow-hidden rounded-[1.75rem] p-8 text-center animate-scale-in sm:p-10"
                 style={{
-                    background: `linear-gradient(160deg, white 0%, ${stage.color}08 100%)`,
-                    border: `1px solid ${stage.color}30`,
+                    background: `linear-gradient(160deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.10) 100%)`,
+                    backdropFilter: 'blur(24px) saturate(160%)',
+                    WebkitBackdropFilter: 'blur(24px) saturate(160%)',
+                    border: `1px solid rgba(255,255,255,0.30)`,
                     boxShadow: `0 0 0 1px ${stage.color}18, 0 24px 64px -16px ${stage.color}40, 0 0 0 8px ${stage.color}08`,
                 }}
             >
@@ -59,8 +61,8 @@ const StageCelebration = () => {
                 >
                     {stage.name}
                 </h2>
-                <p className="mb-1 text-sm leading-relaxed text-neutral-500">{stage.blurb}</p>
-                <p className="mb-8 text-[13px] font-bold italic text-neutral-400">
+                <p className="mb-1 text-sm leading-relaxed text-white/75">{stage.blurb}</p>
+                <p className="mb-8 text-[13px] font-bold italic text-white/55">
                     {STAGE_MESSAGES[stage.n] ?? STAGE_MESSAGES[1]}
                 </p>
                 <Button

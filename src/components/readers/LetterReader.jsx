@@ -56,7 +56,10 @@ const LetterReader = ({ letter: creation, onBack, footerActions, onFinish }) => 
                 )}
             </header>
 
-            <main className="relative z-10 flex flex-1 items-center justify-center overflow-y-auto px-4 py-6 sm:px-8">
+            <main className={cn(
+                'relative z-10 flex flex-1 overflow-y-auto px-4 py-6 sm:px-8',
+                opened ? 'items-start justify-center' : 'items-center justify-center'
+            )}>
                 {!opened ? (
                     /* ---------- Zarf ---------- */
                     <button onClick={() => setOpened(true)} className="group text-center animate-scale-in" aria-label="Mektubu aç">
