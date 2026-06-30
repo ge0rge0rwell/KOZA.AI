@@ -456,28 +456,6 @@ const LandingPage = () => {
                     </div>
                 </section>
 
-                {/* ---------- Köken hikâyesi ---------- */}
-                <section className="px-5 py-20">
-                    <div className="mx-auto max-w-4xl">
-                        <p className="mb-2 text-center text-[11px] font-extrabold uppercase tracking-[0.25em] text-primary-500">Bu fikrin kökeni</p>
-                        <h2 className="mb-10 text-center text-2xl font-extrabold tracking-tight sm:text-3xl">Neden KOZA?</h2>
-                        <div className="card grain relative overflow-hidden bg-gradient-to-br from-primary-950 via-primary-900 to-primary-800 p-10 text-center sm:p-14">
-                            <ButterflyMark size={44} className="mx-auto mb-7 opacity-90" />
-                            <p className="font-serif text-xl italic leading-relaxed text-primary-100 sm:text-2xl">
-                                "Bir öğrenci, her yemekten sonra tabağını eliyle silip tertemiz yapıyordu.
-                                Arkadaşları bu 'tuhaf' davranışla alay etti, onu dışladı. Oysa gerçek, kabuğun çok altındaydı:
-                                Görme engelli annesi, oğlunun yemeğini bitirip bitirmediğini tabağına dokunarak anlıyordu.
-                                O 'tuhaf' hareket, bir çocuğun annesine duyduğu sevgiydi."
-                            </p>
-                            <div className="mx-auto my-7 h-px w-16 bg-primary-400/40" />
-                            <p className="text-sm font-bold leading-relaxed text-primary-100">
-                                KOZA bu gerçek hikâyeden doğdu. Çünkü hepimiz dışarıdan kapalı birer kozayız —
-                                ve hiçbir koza, içindeki kelebeği anlamayan ellerde kırılmamalı.
-                            </p>
-                        </div>
-                    </div>
-                </section>
-
                 {/* ---------- Bilimsel Temel ---------- */}
                 <section id="bilim" className="bg-white/60 px-5 py-20">
                     <div className="mx-auto max-w-6xl">
@@ -487,19 +465,16 @@ const LandingPage = () => {
                         </div>
                         <div className="grid gap-5 md:grid-cols-3 stagger-children">
                             <div className="card card-hover p-7">
-                                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-b from-primary-50 to-primary-100 text-xl shadow-[0_2px_8px_-2px_rgba(106,82,220,0.15)]">📖</div>
                                 <h3 className="mb-2 font-extrabold text-neutral-900">Anlatı Terapisi</h3>
                                 <p className="text-sm leading-relaxed text-neutral-500">White & Epston (1990) tarafından geliştirilen kanıta dayalı psikoterapi yaklaşımı. Zorbalık deneyimini "ben budur" olmaktan çıkarır; kahramanı mağdur değil, dönüşen özne olarak konumlar.</p>
                                 <p className="mt-4 border-t border-neutral-100 pt-3 text-[11px] font-extrabold tracking-wider text-neutral-300">White & Epston, 1990</p>
                             </div>
                             <div className="card card-hover p-7">
-                                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-b from-accent-50 to-amber-100 text-xl shadow-[0_2px_8px_-2px_rgba(226,154,40,0.2)]">🤖</div>
                                 <h3 className="mb-2 font-extrabold text-neutral-900">3 Aşamalı AI Hattı</h3>
                                 <p className="text-sm leading-relaxed text-neutral-500">Mimari analiz → üretim → editoryal kontrol. Her eser üç bağımsız AI çağrısından geçer. Kriz tespiti üretimden önce çalışır; terapötik doğruluk algoritmik olarak güvence altında.</p>
                                 <p className="mt-4 border-t border-neutral-100 pt-3 text-[11px] font-extrabold tracking-wider text-neutral-300">RAG + LLM pipeline sistemi</p>
                             </div>
                             <div className="card card-hover p-7">
-                                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-b from-success-50 to-success-100/80 text-xl shadow-[0_2px_8px_-2px_rgba(52,149,93,0.2)]">🦋</div>
                                 <h3 className="mb-2 font-extrabold text-neutral-900">Metamorfoz Oyunlaştırma</h3>
                                 <p className="text-sm leading-relaxed text-neutral-500">Self-determination theory (Deci & Ryan, 1985) temelinde 7 aşamalı ilerleme sistemi. Koza→kelebek metaforu, Anlatı Terapisi'nin "yeniden yazma" ilkesiyle birebir örtüşür.</p>
                                 <p className="mt-4 border-t border-neutral-100 pt-3 text-[11px] font-extrabold tracking-wider text-neutral-300">Deci & Ryan, 1985</p>
@@ -563,7 +538,6 @@ const LandingPage = () => {
                         <div className="grid gap-5 md:grid-cols-3 stagger-children">
                             {TESTIMONIALS.map((t) => (
                                 <div key={t.name} className="card flex flex-col p-7">
-                                    <span className="mb-5 text-4xl" aria-hidden>{t.emoji}</span>
                                     <p className="mb-6 flex-1 font-serif text-[15px] italic leading-relaxed text-neutral-600">"{t.quote}"</p>
                                     <div className="border-t border-neutral-100 pt-4">
                                         <p className="font-extrabold text-neutral-900">{t.name}</p>
@@ -735,13 +709,13 @@ const LandingPage = () => {
                                     Yolculuğa Başla
                                 </Button>
                                 <div className="mt-10 flex flex-wrap items-center justify-center gap-6 border-t border-primary-500/40 pt-8 text-[12px] font-extrabold text-primary-300">
-                                    <span>📖 White & Epston, 1990</span>
+                                    <span>White & Epston, 1990</span>
                                     <span className="h-3 w-px bg-primary-500/40" aria-hidden />
-                                    <span>🤖 3 Aşamalı AI Hattı</span>
+                                    <span>3 Aşamalı AI Hattı</span>
                                     <span className="h-3 w-px bg-primary-500/40" aria-hidden />
-                                    <span>🔒 Tam Anonim</span>
+                                    <span>Tam Anonim</span>
                                     <span className="h-3 w-px bg-primary-500/40" aria-hidden />
-                                    <span>🦋 7 Dönüşüm Evresi</span>
+                                    <span>7 Dönüşüm Evresi</span>
                                 </div>
                             </div>
                         </div>
@@ -758,11 +732,11 @@ const LandingPage = () => {
                 <div className="mx-auto flex max-w-6xl flex-col items-center gap-5 text-center">
                     <Logo size="sm" />
                     <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[12px] font-bold text-neutral-400">
-                        <span>📚 White & Epston, Anlatı Terapisi (1990)</span>
+                        <span>White & Epston, Anlatı Terapisi (1990)</span>
                         <span>·</span>
-                        <span>🎯 Deci & Ryan, SDT (1985)</span>
+                        <span>Deci & Ryan, SDT (1985)</span>
                         <span>·</span>
-                        <span>🛡 UNICEF Çocuk Hakları Sözleşmesi</span>
+                        <span>UNICEF Çocuk Hakları Sözleşmesi</span>
                     </div>
                     <p className="max-w-md text-[12px] leading-relaxed text-neutral-400">
                         {SAFETY_DISCLAIMER} Acil durumlarda <strong className="text-neutral-600">182</strong>'yi (İntihar Önleme Hattı) veya <strong className="text-neutral-600">ALO 183</strong>'ü (Aile ve Sosyal Hizmetler) arayın.
