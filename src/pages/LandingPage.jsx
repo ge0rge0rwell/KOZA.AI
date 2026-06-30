@@ -172,13 +172,15 @@ const FaqItem = ({ q, a, open, onToggle }) => (
 const LandingPage = () => {
     const [showAuth, setShowAuth] = useState(false);
     const [openFaq, setOpenFaq] = useState(0);
+    const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
     return (
         <div className="min-h-dvh bg-neutral-50">
             <div className="ambient-bg" aria-hidden />
 
             {/* ---------- Üst bar ---------- */}
-            <header className="fixed inset-x-0 top-0 z-50 border-b border-neutral-200/60 surface-tint">
+            <header className="fixed inset-x-0 top-0 z-50 border-b border-neutral-200/60 surface-tint"
+                    style={{ paddingTop: 'env(safe-area-inset-top)' }}>
                 <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
                     <Logo size="md" />
                     <nav className="hidden items-center gap-6 text-sm font-bold text-neutral-500 md:flex" aria-label="Sayfa içi">
@@ -188,9 +190,45 @@ const LandingPage = () => {
                         <a href="#tankliklar" className="transition-colors hover:text-neutral-900">Tanıklıklar</a>
                         <a href="#guven" className="transition-colors hover:text-neutral-900">Güvenlik</a>
                         <a href="#sss" className="transition-colors hover:text-neutral-900">SSS</a>
+                        <a href="#indir" className="transition-colors hover:text-neutral-900">İndir</a>
                     </nav>
-                    <Button size="sm" onClick={() => setShowAuth(true)}>Başla</Button>
+                    <div className="flex items-center gap-2">
+                        <Button size="sm" onClick={() => setShowAuth(true)}>Başla</Button>
+                        <button
+                            onClick={() => setMobileNavOpen((v) => !v)}
+                            aria-label={mobileNavOpen ? 'Menüyü kapat' : 'Menüyü aç'}
+                            aria-expanded={mobileNavOpen}
+                            className="touch-target rounded-xl text-neutral-600 transition-colors hover:bg-neutral-100 md:hidden"
+                        >
+                            {mobileNavOpen ? (
+                                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><line x1="4" y1="4" x2="18" y2="18"/><line x1="18" y1="4" x2="4" y2="18"/></svg>
+                            ) : (
+                                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><line x1="3" y1="6" x2="19" y2="6"/><line x1="3" y1="11" x2="19" y2="11"/><line x1="3" y1="16" x2="19" y2="16"/></svg>
+                            )}
+                        </button>
+                    </div>
                 </div>
+                {mobileNavOpen && (
+                    <nav
+                        className="border-t border-neutral-200/60 bg-white/95 backdrop-blur-md px-5 py-4 md:hidden animate-rise-in"
+                        aria-label="Mobil gezinme"
+                        onClick={() => setMobileNavOpen(false)}
+                    >
+                        {[
+                            ['#bilim', 'Bilim'],
+                            ['#nasil', 'Nasıl çalışır?'],
+                            ['#ozellikler', 'Özellikler'],
+                            ['#tankliklar', 'Tanıklıklar'],
+                            ['#guven', 'Güvenlik'],
+                            ['#sss', 'SSS'],
+                            ['#indir', 'Uygulamayı İndir 📲'],
+                        ].map(([href, label]) => (
+                            <a key={href} href={href} className="block py-3 text-sm font-bold text-neutral-700 border-b border-neutral-100 last:border-0 hover:text-primary-700">
+                                {label}
+                            </a>
+                        ))}
+                    </nav>
+                )}
             </header>
 
             <main>
@@ -207,7 +245,7 @@ const LandingPage = () => {
                                 <span className="h-3 w-px bg-primary-300" aria-hidden />
                                 <span className="rounded-full bg-primary-600 px-2 py-0.5 text-[10px] text-white">TEKNOFEST 2026</span>
                             </div>
-                            <h1 className="mb-6 text-[2.6rem] font-extrabold leading-[1.06] tracking-tight text-neutral-900 sm:text-5xl lg:text-[62px] animate-rise-in" style={{ animationDelay: '0.08s' }}>
+                            <h1 className="mb-6 text-[1.85rem] font-extrabold leading-[1.08] tracking-tight text-neutral-900 sm:text-[2.6rem] md:text-5xl lg:text-[62px] animate-rise-in" style={{ animationDelay: '0.08s' }}>
                                 Zorbalık hikâyenin sonu değil.{' '}
                                 <span className="text-gradient">Sadece bir koza evresi.</span>
                             </h1>
@@ -232,7 +270,7 @@ const LandingPage = () => {
                                 </p>
                             </div>
                             {/* Canlı dönüşüm önizlemesi */}
-                            <div className="mt-6 animate-rise-in hidden sm:block" style={{ animationDelay: '0.38s' }}>
+                            <div className="mt-6 animate-rise-in" style={{ animationDelay: '0.38s' }}>
                                 <TransformPreview />
                             </div>
                         </div>
@@ -246,11 +284,11 @@ const LandingPage = () => {
                 <section className="border-y border-neutral-200/70 bg-white/70 py-5 backdrop-blur-sm">
                     <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-x-10 gap-y-3 px-5 text-[13px] font-extrabold text-neutral-500">
                         <span className="flex items-center gap-2 rounded-full px-3 py-1.5 transition-colors hover:bg-primary-50 hover:text-primary-700"><Lock size={14} className="text-primary-500" /> Anonim kimlik</span>
-                        <span className="h-3.5 w-px bg-neutral-200" aria-hidden />
+                        <span className="hidden sm:inline-block h-3.5 w-px bg-neutral-200" aria-hidden />
                         <span className="flex items-center gap-2 rounded-full px-3 py-1.5 transition-colors hover:bg-accent-50 hover:text-accent-700"><Sparkles size={14} className="text-accent-500" /> Anlatı Terapisi × Yapay Zekâ</span>
-                        <span className="h-3.5 w-px bg-neutral-200" aria-hidden />
+                        <span className="hidden sm:inline-block h-3.5 w-px bg-neutral-200" aria-hidden />
                         <span className="flex items-center gap-2 rounded-full px-3 py-1.5 transition-colors hover:bg-success-50 hover:text-success-700"><ShieldCheck size={14} className="text-success-500" /> Güvenli içerik filtreleri</span>
-                        <span className="h-3.5 w-px bg-neutral-200" aria-hidden />
+                        <span className="hidden sm:inline-block h-3.5 w-px bg-neutral-200" aria-hidden />
                         <span className="flex items-center gap-2 rounded-full px-3 py-1.5 transition-colors hover:bg-danger-50 hover:text-danger-600"><HeartHandshake size={14} className="text-danger-500" /> 7/24 destek kaynakları</span>
                     </div>
                 </section>
@@ -403,7 +441,9 @@ const LandingPage = () => {
                 <section className="px-5 py-14">
                     <div className="mx-auto max-w-4xl">
                         <p className="mb-6 text-center text-[11px] font-extrabold uppercase tracking-[0.25em] text-neutral-400">Geleneksel yaklaşımlardan farkı</p>
-                        <div className="card overflow-hidden overflow-x-auto scrollbar-thin">
+                        <div className="card overflow-hidden">
+                            <div className="overflow-x-auto scrollbar-thin" role="region" aria-label="Karşılaştırma tablosu" tabIndex={0}>
+                            <p className="px-6 pt-3 text-[11px] font-bold text-neutral-400 sm:hidden">← Tabloyu kaydır →</p>
                             <div className="min-w-[520px]">
                                 <div className="grid grid-cols-[90px_1fr_1fr] border-b border-neutral-100 bg-neutral-50/60 px-6 py-3 text-[11px] font-extrabold uppercase tracking-widest text-neutral-400">
                                     <span>Konu</span>
