@@ -15,17 +15,49 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="icon" type="image/png" href="/pwa-192x192.png" />
 
+  <!--
+    DNS prefetch for all external origins used at runtime.
+    Fires before browser needs them → eliminates lookup latency (~20-100ms per origin).
+  -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
+  <link rel="dns-prefetch" href="https://firestore.googleapis.com" />
+  <link rel="dns-prefetch" href="https://identitytoolkit.googleapis.com" />
+  <link rel="dns-prefetch" href="https://securetoken.googleapis.com" />
+  <link rel="dns-prefetch" href="https://openrouter.ai" />
+
+  <!--
+    Non-blocking font load pattern:
+    - rel="preload" as="style" starts the download immediately
+    - onload switches rel to "stylesheet" once downloaded (non-blocking)
+    - <noscript> fallback for JS-disabled browsers
+    Eliminates the render-blocking Google Fonts stylesheet request.
+  -->
+  <link rel="preload" as="style"
     href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap"
-    rel="stylesheet" />
+    onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" />
+  </noscript>
 
   <title>KOZA — Hikâyeni Yeniden Yaz</title>
 </head>
 
 <body>
-  <div id="root"></div>
+  <!--
+    Inline critical shell: gives the browser something to paint instantly
+    before any JS loads. Matches the FullScreenLoader in App.jsx exactly.
+  -->
+  <div id="root">
+    <div style="display:flex;min-height:100dvh;align-items:center;justify-content:center;background:#FAF9F7">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:16px">
+        <span style="font-size:36px;line-height:1" aria-hidden="true">🦋</span>
+        <div style="width:28px;height:28px;border-radius:50%;border:2.5px solid #e5e3ef;border-top-color:#6A52DC;animation:_ks 0.7s linear infinite"></div>
+      </div>
+    </div>
+    <style>@keyframes _ks{to{transform:rotate(360deg)}}</style>
+  </div>
   <script type="module" src="/src/main.jsx"></script>
 </body>
 

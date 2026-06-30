@@ -49,6 +49,15 @@ export const StoryProvider = ({ children }) => {
     const [communityLoading, setCommunityLoading] = useState(() => Boolean(db));
     const [interactions, setInteractions] = useState(loadInteractions);
 
+    /* Lazy-load extra seed stories after first paint — keeps them out of main bundle */
+    useEffect(() => {
+        let cancelled = false;
+        import('../config/seedStories').then(({ default: extraSeeds }) => {
+            if (!cancelled) setCommunity((prev) => mergeCommunity(prev, extraSeeds));
+        });
+        return () => { cancelled = true; };
+    }, []);
+
     /* ---------- Kalıcılık ---------- */
     useEffect(() => {
         localStorage.setItem(CREATIONS_KEY, JSON.stringify(creations.slice(0, 100)));
