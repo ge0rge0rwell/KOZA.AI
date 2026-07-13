@@ -183,7 +183,7 @@ Sonra yazmaya başladı. Yanlış cümlelerle, eksik yerlerle, hepsini anlatamad
     emotionTags: ['utanc', 'korku'],
     storyMoment: 'the_moment',
     title: 'Ekran Işığında',
-    content: `Defne o geceyi çalışma masasında bitirmeyi düşünüyordu — ödev vardı, bir de okumak istediği bir şey. Telefonu masanın kenarına bıraktı.
+    content: `Görkem o geceyi çalışma masasında bitirmeyi düşünüyordu — ödev vardı, bir de okumak istediği bir şey. Telefonu masanın kenarına bıraktı.
 
 Titreşim. Bir bildirim, sonra üst üste.
 
@@ -195,7 +195,7 @@ Hesabı kapat, dedi kendi kendine. Kapattı. Ama gözleri hâlâ o sözcükleri 
 
 Bu fotoğraf kaç kişiye gitmişti? Kaç kişi şu an görüyordu? Bu soruları sormak büyük bir hataydı — çünkü sorunca cevabı bilmemek daha da ağırlaşıyordu, zihin en kötü ihtimali seçiyordu.
 
-Defne telefonu çevirerek ekranını masaya yatırdı. Ödev sayfası hâlâ açıktı bilgisayarda.
+Görkem telefonu çevirerek ekranını masaya yatırdı. Ödev sayfası hâlâ açıktı bilgisayarda.
 
 Hiçbir şey yazmadı o gece.`,
   },
@@ -206,7 +206,7 @@ Hiçbir şey yazmadı o gece.`,
     emotionTags: ['caresizlik', 'korku'],
     storyMoment: 'night_after',
     title: 'Kapatmak Yetmiyor',
-    content: `Defne uygulamayı kapattı. Açtı. Kapattı. Bu üç kez tekrar etti — her kapanışta "artık bakmayacağım" diyerek, her açılışta bir önceki kararı unutarak.
+    content: `Görkem uygulamayı kapattı. Açtı. Kapattı. Bu üç kez tekrar etti — her kapanışta "artık bakmayacağım" diyerek, her açılışta bir önceki kararı unutarak.
 
 Yorum sayısı artmıştı. Yirmi beşten otuza, otuza kırka. Her yeni yorum, gönülsüzce bakan bir göz çifti daha.
 
@@ -214,7 +214,7 @@ Bir noktada telefonu tamamen bırakmaya karar verdi — çekmecenin içine koydu
 
 Pencereden dışarı baktı — sokak lambası yanıyordu, komşunun arabası park yerindeydi. Dünya devam ediyordu. Başka evlerde başka insanlar bir şeyler yapıyordu şu an. Ve o gönderi onların hiçbirini ilgilendirmiyordu.
 
-Ama Defne için bütün gece doluydu onunla.
+Ama Görkem için bütün gece doluydu onunla.
 
 Sabah olunca gönderi hâlâ orada olacaktı.`,
   },
@@ -225,15 +225,15 @@ Sabah olunca gönderi hâlâ orada olacaktı.`,
     emotionTags: ['korku', 'utanc'],
     storyMoment: 'body_next_day',
     title: 'Telefonu Çantaya Koymak',
-    content: `Sabah okula giderken Defne telefonu çantasının en dibine koydu. Farkında olmaksızın bir karar almıştı gece: bugün bakmayacaktı.
+    content: `Sabah okula giderken Görkem telefonu çantasının en dibine koydu. Farkında olmaksızın bir karar almıştı gece: bugün bakmayacaktı.
 
 Bakarsa birinin yüzüne bakmak zorunda kalacaktı. O yüze bakarken "biliyor mu" diye düşünecekti. Sonra diğer yüzlere bakacak ve her birinde aynı soruyu soracaktı.
 
 Bunun yerine düz baktı. Zemine, duvara, kapıya.
 
-Birisi günaydın dedi — sınıf arkadaşı. Defne günaydın dedi. Sesi normal çıktı. Bu küçük bir şeydi ama tuhaf biçimde önemliydi. Sesinin normal çıkması.
+Birisi günaydın dedi — sınıf arkadaşı. Görkem günaydın dedi. Sesi normal çıktı. Bu küçük bir şeydi ama tuhaf biçimde önemliydi. Sesinin normal çıkması.
 
-Sınıfa girdi, yerine oturdu. Öğretmen geldi, ders başladı. Defne elindeki kalemi tuttu ve yazmaya başladı — ama dersin notlarını değil, en üste kendi adını yazdı ve baktı.
+Sınıfa girdi, yerine oturdu. Öğretmen geldi, ders başladı. Görkem elindeki kalemi tuttu ve yazmaya başladı — ama dersin notlarını değil, en üste kendi adını yazdı ve baktı.
 
 Adı oradaydı. Kendi yazısıyla, kendi kâğıdında, kimsenin koyamayacağı ya da silemeyeceği bir yerde.
 
@@ -246,15 +246,15 @@ Sonra dersi yazmaya başladı.`,
     emotionTags: ['korku'],
     storyMoment: 'open_road',
     title: 'Bildirim Sesi',
-    content: `Bir hafta sonra Defne'nin telefonu yine titreşti ve Defne irkildi — hâlâ irkiliyordu.
+    content: `Bir hafta sonra Görkem'nin telefonu yine titreşti ve Görkem irkildi — hâlâ irkiliyordu.
 
-Ama bu sefer ekranda annesinin adı yazıyordu. "Akşam yemek için ne istersin?" Basit bir mesajdı. Defne "Makarna olur" yazdı ve gönderdi. Sonra durdu.
+Ama bu sefer ekranda annesinin adı yazıyordu. "Akşam yemek için ne istersin?" Basit bir mesajdı. Görkem "Makarna olur" yazdı ve gönderdi. Sonra durdu.
 
 İrkilmenin geçmesi birkaç saniye sürdü. Sonra geçti.
 
 Bu bir hafta öncekinin aynı değildi — o hafta her titreşim mide ağrısıyla geliyordu, her bildirim bir tehdit gibi hissediyordu. Bu hafta henüz tam değildi; hâlâ o irkilme anı vardı. Ama o an kısalmıştı. Ve kısalacaktı daha da.
 
-Defne telefonu cebine koydu ve yürümeye devam etti.
+Görkem telefonu cebine koydu ve yürümeye devam etti.
 
 Gönderi hâlâ bir yerlerde duruyordu — internet hafızası uzundu. Ama bugün ona bakmadı. Çantasının dibinde duruyordu telefon ve bu pozisyon, bu bilinçli tercih, küçük ama gerçek bir şeydi.`,
   },
