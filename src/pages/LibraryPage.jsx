@@ -5,6 +5,7 @@ import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
 import Modal from '../components/ui/Modal';
 import EmptyState from '../components/ui/EmptyState';
+import CocoonVisual from '../components/cocoon/CocoonVisual';
 import SegmentedTabs from '../components/ui/SegmentedTabs';
 import { useStory } from '../context/StoryContext';
 import { useUI } from '../context/UIContext';
@@ -70,12 +71,14 @@ const LibraryPage = () => {
 
             {creations.length === 0 ? (
                 <Card className="animate-rise-in">
-                    <EmptyState
-                        emoji="📚"
-                        title="Kütüphanen henüz boş"
-                        description="İlk dönüşümünü yaptığında eserin burada, sana özel rafında duracak."
-                        action={<Button icon={PenLine} onClick={() => navigate('olustur')}>İlk Eserini Oluştur</Button>}
-                    />
+                    <div className="flex flex-col items-center justify-center px-6 py-14 text-center">
+                        <CocoonVisual stage={1} size={96} className="mb-5" />
+                        <h3 className="mb-1.5 text-lg font-bold text-neutral-900">Kütüphanen henüz boş</h3>
+                        <p className="mb-6 max-w-sm text-sm leading-relaxed text-neutral-500">
+                            İlk dönüşümünü yaptığında eserin burada, sana özel rafında duracak — kozan orada açılmaya başlar.
+                        </p>
+                        <Button icon={PenLine} onClick={() => navigate('olustur')}>İlk Eserini Oluştur</Button>
+                    </div>
                 </Card>
             ) : filtered.length === 0 ? (
                 <Card className="animate-fade-in">

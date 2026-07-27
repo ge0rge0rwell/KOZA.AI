@@ -185,13 +185,13 @@ export function buildInjectionBlock(analysis, spaces = []) {
   → Sayfa 9-10: dönüşmüş; aynı şey, farklı anlam — iyileşme burada görünür
 
 KARAKTER ÖNCESİ: ${characterBefore}
-  → Sayfa 1\'de bu kimliğin izini bırak. Kayıplar ancak varoluşu olanlar için vardır.
+  → Sayfa 1'de bu kimliğin izini bırak. Kayıplar ancak varoluşu olanlar için vardır.
 
 PİVOT KONUMU: "${pivotLocation}"
-  → Sayfa 9\'da karakter buraya geri döner. Aynı yer — ama içerisi farklı.
+  → Sayfa 9'da karakter buraya geri döner. Aynı yer — ama içerisi farklı.
 
 TERS-ÇEVİRME: ${inversion}
-  → Sayfa 6-7\'de bu paradoksu göster. Adını koyma — okuyucu hisseder.
+  → Sayfa 6-7'de bu paradoksu göster. Adını koyma — okuyucu hisseder.
 
 BAŞLIK TOHUMU: "${titleSeed}"
   → "title" alanı bu tohumdan ya birebil ya dönüşmüş olarak gelecek.

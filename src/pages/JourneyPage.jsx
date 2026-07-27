@@ -101,15 +101,17 @@ const JourneyPage = () => {
                                 )}
                                 <span
                                     className={cn(
-                                        'relative z-10 mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 text-sm font-extrabold transition-all',
-                                        isCurrent
-                                            ? 'border-primary-400 bg-gradient-to-b from-primary-500 to-primary-700 text-white shadow-glow animate-pulse-soft'
-                                            : reached
-                                                ? 'border-primary-300 bg-primary-100 text-primary-700'
-                                                : 'border-neutral-200 bg-white text-neutral-300'
+                                        'relative z-10 mt-0.5 flex h-12 w-12 shrink-0 items-center justify-center rounded-full transition-all',
+                                        isCurrent && 'shadow-glow animate-pulse-soft ring-2 ring-primary-300',
+                                        !reached && 'opacity-35 grayscale'
                                     )}
                                 >
-                                    {reached && !isCurrent ? <Check size={16} strokeWidth={3} /> : s.n}
+                                    <CocoonVisual stage={s.n} size={40} />
+                                    {reached && !isCurrent && (
+                                        <span className="absolute -bottom-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-primary-600 text-white shadow-sm">
+                                            <Check size={10} strokeWidth={3.5} />
+                                        </span>
+                                    )}
                                 </span>
                                 <div className={cn('mb-4 flex-1 rounded-2xl border p-4 transition-all', isCurrent ? 'card border-primary-200 bg-primary-50/40' : reached ? 'border-transparent' : 'border-transparent opacity-50')}>
                                     <div className="flex flex-wrap items-center justify-between gap-2">

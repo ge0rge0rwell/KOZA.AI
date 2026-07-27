@@ -1,8 +1,40 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+
+    // Kullanıcının kendi profili + eserleri: yalnızca sahibi okuyup yazabilir.
+    // creations altında ham userInput bulunur — bu yüzden herkese kapalı.
     match /users/{userId}/{document=**} {
       allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Topluluk: herkes okuyabilir, yalnız giriş yapmış kullanıcı yazabilir.
+    match /community/{postId} {
+      allow read: if true;
+
+      allow create: if request.auth != null
+        && request.resource.data.ownerUid == request.auth.uid
+        && !request.resource.data.keys().hasAny(['userInput'])
+        && request.resource.data.keys().hasOnly([
+          'type', 'title', 'preview', 'category', 'themeColor',
+          'pages', 'levels', 'letter',
+          'authorPseudonym', 'authorEmoji', 'authorColor', 'ownerUid',
+          'hearts', 'hugs', 'reads', 'heartedBy', 'huggedBy', 'reports', 'createdAt'
+        ])
+        && request.resource.data.hearts == 0
+        && request.resource.data.hugs == 0
+        && request.resource.data.reads == 0
+        && request.resource.data.reports == 0;
+
+      // Sahibi kendi eserini silebilir; başkası ownerUid'i değiştiremez.
+      allow delete: if request.auth != null && resource.data.ownerUid == request.auth.uid;
+
+      // Etkileşimler (kalp/hemhal/keşif/rapor): sahiplik ve içerik alanları sabit kalmalı,
+      // yalnız sayaç/etkileşim listeleri değişebilir.
+      allow update: if request.auth != null
+        && request.resource.data.ownerUid == resource.data.ownerUid
+        && request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['hearts', 'hugs', 'reads', 'heartedBy', 'huggedBy', 'reports']);
     }
   }
 }

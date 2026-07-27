@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowLeft, ArrowRight, ChevronsRight, Lock } from 'lucide-react';
 import Button from '../ui/Button';
+import CocoonVisual from '../cocoon/CocoonVisual';
 import { cn } from '../../utils/helpers';
 
 const EMOTION_CHIPS = [
@@ -159,8 +160,8 @@ const ExperienceWizard = ({ onComplete }) => {
         return (
             <div className="space-y-5 animate-rise-in">
                 <div className="text-center">
-                    <span className="text-5xl">🦋</span>
-                    <h2 className="mt-3 text-2xl font-extrabold text-neutral-900">Neredeyse hazır!</h2>
+                    <CocoonVisual stage={7} size={104} className="mx-auto" />
+                    <h2 className="mt-1 text-2xl font-extrabold text-neutral-900">Neredeyse hazır!</h2>
                     <p className="mt-1 text-sm leading-relaxed text-neutral-500">
                         Paylaştıklarını gözden geçir — sonra dönüştürmeye başlayalım.
                     </p>
@@ -211,17 +212,20 @@ const ExperienceWizard = ({ onComplete }) => {
 
     return (
         <div className="space-y-6">
-            {/* Progress bar */}
-            <div>
-                <div className="mb-2 flex items-center justify-between text-[12px] font-bold text-neutral-400">
-                    <span>{step + 1} / {totalSteps} adım</span>
-                    {!s.required && <span className="text-neutral-300">İsteğe bağlı — atlayabilirsin</span>}
-                </div>
-                <div className="h-1.5 w-full overflow-hidden rounded-full bg-neutral-100">
-                    <div
-                        className="h-full rounded-full bg-primary-500 transition-all duration-500 ease-out"
-                        style={{ width: `${progress}%` }}
-                    />
+            {/* İlerleme: koza her adımda biraz daha aydınlanır */}
+            <div className="flex items-center gap-4">
+                <CocoonVisual stage={step + 1} size={56} className="shrink-0" />
+                <div className="flex-1">
+                    <div className="mb-2 flex items-center justify-between text-[12px] font-bold text-neutral-400">
+                        <span>{step + 1} / {totalSteps} adım</span>
+                        {!s.required && <span className="text-neutral-300">İsteğe bağlı — atlayabilirsin</span>}
+                    </div>
+                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-neutral-100">
+                        <div
+                            className="h-full rounded-full bg-primary-500 transition-all duration-500 ease-out"
+                            style={{ width: `${progress}%` }}
+                        />
+                    </div>
                 </div>
             </div>
 

@@ -93,7 +93,7 @@ const SafetyModal = () => {
             <div className="px-7 pb-8 pt-10">
                 {view === 'resources' ? (
                     <>
-                        <span className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-danger-50 text-danger-500">
+                        <span className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary-50 text-primary-600">
                             <HeartHandshake size={26} />
                         </span>
                         <h2 id="safety-title" className="mb-2 text-center text-2xl font-extrabold">Yalnız değilsin</h2>
